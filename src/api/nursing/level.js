@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询护理等级列表
 export function listLevel(query) {
   return request({
-    url: '/level/level/list',
+    url: '/nursing/level/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listLevel(query) {
 // 查询护理等级详细
 export function getLevel(id) {
   return request({
-    url: '/level/level/' + id,
+    url: '/nursing/level/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getLevel(id) {
 // 新增护理等级
 export function addLevel(data) {
   return request({
-    url: '/level/level',
+    url: '/nursing/level',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addLevel(data) {
 // 修改护理等级
 export function updateLevel(data) {
   return request({
-    url: '/level/level',
+    url: '/nursing/level',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateLevel(data) {
 // 删除护理等级
 export function delLevel(id) {
   return request({
-    url: '/level/level/' + id,
+    url: '/nursing/level/' + id,
     method: 'delete'
   })
 }
