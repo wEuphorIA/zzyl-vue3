@@ -89,11 +89,13 @@ const showTip = computed(
 watch(() => props.modelValue, val => {
   if (val) {
     // 首先将值转为数组
+    //断点
+
     const list = Array.isArray(val) ? val : props.modelValue.split(",");
     // 然后将数组转为对象数组
     fileList.value = list.map(item => {
       if (typeof item === "string") {
-        if (item.indexOf(baseUrl) === -1) {
+        if (item.indexOf("http") === -1) {
           item = { name: baseUrl + item, url: baseUrl + item };
         } else {
           item = { name: item, url: item };
