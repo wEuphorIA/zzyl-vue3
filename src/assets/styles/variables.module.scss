@@ -43,6 +43,13 @@ $--color-danger: #F56C6C;
 $--color-info: #909399;
 
 $base-sidebar-width: 200px;
+$base-font-size-12: 12px;
+$base-font-size-14: 14px;
+$base-font-size-16: 16px;
+$base--color-bk2: #67C23A;
+$base-color-bk4: #67C23A;
+$--color-bk3: #909399;
+$--color-main: $--color-danger;
 
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
