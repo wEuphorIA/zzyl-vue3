@@ -96,7 +96,7 @@ export function updateUserPwd(oldPassword, newPassword) {
   return request({
     url: '/system/user/profile/updatePwd',
     method: 'put',
-    params: data
+    data: data
   })
 }
 
@@ -105,6 +105,7 @@ export function uploadAvatar(data) {
   return request({
     url: '/system/user/profile/avatar',
     method: 'post',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     data: data
   })
 }
@@ -132,4 +133,12 @@ export function deptTreeSelect() {
     url: '/system/user/deptTree',
     method: 'get'
   })
+}
+
+// 根据部门编号，查询员工列表
+export function getAllUserList(data) {
+  return request({
+    url: '/system/user/listByDeptId?deptId=' + data.deptId,
+    method: 'get',
+  });
 }

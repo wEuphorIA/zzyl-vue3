@@ -5,30 +5,20 @@
         <blockquote class="text-warning" style="font-size: 14px">
           领取阿里云通用云产品1888优惠券
           <br />
-          <el-link
-            href="https://www.aliyun.com/minisite/goods?userCode=brki8iof"
-            type="primary"
-            target="_blank"
-            >https://www.aliyun.com/minisite/goods?userCode=brki8iof</el-link
-          >
+          <el-link href="https://www.aliyun.com/minisite/goods?userCode=brki8iof" type="primary"
+            target="_blank">https://www.aliyun.com/minisite/goods?userCode=brki8iof</el-link>
           <br />
           领取腾讯云通用云产品2860优惠券
           <br />
           <el-link
             href="https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console"
             type="primary"
-            target="_blank"
-            >https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console</el-link
-          >
+            target="_blank">https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console</el-link>
           <br />
           阿里云服务器折扣区
-          <el-link href="http://aly.ruoyi.vip" type="primary" target="_blank"
-            >>☛☛点我进入☚☚</el-link
-          >
+          <el-link href="http://aly.ruoyi.vip" type="primary" target="_blank">>☛☛点我进入☚☚</el-link>
           &nbsp;&nbsp;&nbsp; 腾讯云服务器秒杀区
-          <el-link href="http://txy.ruoyi.vip" type="primary" target="_blank"
-            >>☛☛点我进入☚☚</el-link
-          ><br />
+          <el-link href="http://txy.ruoyi.vip" type="primary" target="_blank">>☛☛点我进入☚☚</el-link><br />
           <h4 class="text-danger">
             云产品通用红包，可叠加官网常规优惠使用。(仅限新用户)
           </h4>
@@ -41,7 +31,7 @@
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
         <h2>若依后台管理框架</h2>
         <p>
-          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依管理系统，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
+          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了中州养老，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
         </p>
         <p>
           <b>当前版本:</b> <span>v{{ version }}</span>
@@ -50,19 +40,9 @@
           <el-tag type="danger">&yen;免费开源</el-tag>
         </p>
         <p>
-          <el-button
-            type="primary"
-            icon="Cloudy"
-            plain
-            @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
-            >访问码云</el-button
-          >
-          <el-button
-            icon="HomeFilled"
-            plain
-            @click="goTarget('http://ruoyi.vip')"
-            >访问主页</el-button
-          >
+          <el-button type="primary" icon="Cloudy" plain
+            @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')">访问码云</el-button>
+          <el-button icon="HomeFilled" plain @click="goTarget('http://ruoyi.vip')">访问主页</el-button>
         </p>
       </el-col>
 
@@ -111,31 +91,24 @@
           </template>
           <div class="body">
             <p>
-              <i class="el-icon-s-promotion"></i> 官网：<el-link
-                href="http://www.ruoyi.vip"
-                target="_blank"
-                >http://www.ruoyi.vip</el-link
-              >
+              <i class="el-icon-s-promotion"></i> 官网：<el-link href="http://www.ruoyi.vip"
+                target="_blank">http://www.ruoyi.vip</el-link>
             </p>
             <p>
               <i class="el-icon-user-solid"></i> QQ群：<s> 满937441 </s> <s> 满887144332 </s>
               <s> 满180251782 </s> <s> 满104180207 </s> <s> 满186866453 </s> <s> 满201396349 </s>
-              <s> 满101456076 </s> <s> 满101539465 </s> <s> 满264312783 </s> <s> 满167385320 </s> 
-              <s> 满104748341 </s> <s> 满160110482 </s> <s> 满170801498 </s> <s> 满108482800 </s> 
-              <s> 满101046199 </s> <s> 满136919097 </s> <s> 满143961921 </s> <s> 满174951577 </s> <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Lj0nHRAPD5CZv1jTOciuxXVloBJLS2Lp&authKey=Q2RxC6%2Ffxney9yOGBY0sDJxFhX9b7o1FRY1bsESmkbcZ4PFt6Vx92FpVo9O1u9p4&noverify=0&group_code=161281055" target="_blank">161281055</a>
+              <s> 满101456076 </s> <s> 满101539465 </s> <s> 满264312783 </s> <s> 满167385320 </s>
+              <s> 满104748341 </s> <s> 满160110482 </s> <s> 满170801498 </s> <s> 满108482800 </s>
+              <s> 满101046199 </s> <s> 满136919097 </s> <s> 满143961921 </s> <s> 满174951577 </s>
+              <s> 满161281055 </s> <s> 满138988063 </s> <a
+                href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=SUc-msaypcqB2UTFif4eqGlBHkKcvMNP&authKey=JdQBouY2PG%2BS%2BCzAfIgbCGNgxyahpfh24IW%2F03rPxGilhqVbisLma%2FFFnt79DHNh&noverify=0&group_code=151450850"
+                target="_blank">151450850</a>
             </p>
             <p>
-              <i class="el-icon-chat-dot-round"></i> 微信：<a
-                href="javascript:;"
-                >/ *若依</a
-              >
+              <i class="el-icon-chat-dot-round"></i> 微信：<a href="javascript:;">/ *若依</a>
             </p>
             <p>
-              <i class="el-icon-money"></i> 支付宝：<a
-                href="javascript:;"
-                class="支付宝信息"
-                >/ *若依</a
-              >
+              <i class="el-icon-money"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *若依</a>
             </p>
           </div>
         </el-card>
@@ -148,6 +121,36 @@
             </div>
           </template>
           <el-collapse accordion>
+            <el-collapse-item title="v3.8.8 - 2024-06-30">
+              <ol>
+                <li>菜单管理新增路由名称</li>
+                <li>新增数据脱敏过滤注解</li>
+                <li>用户密码新增非法字符验证</li>
+                <li>限制用户操作数据权限范围</li>
+                <li>代码生成新增创建表结构功能</li>
+                <li>定时任务白名单配置范围缩小</li>
+                <li>优化代码生成主子表关联查询方式</li>
+                <li>Excel注解新增属性comboReadDict</li>
+                <li>Excel注解ColumnType类型新增文本</li>
+                <li>新增国际化资源文件配置</li>
+                <li>升级oshi到最新版本6.6.1</li>
+                <li>升级druid到最新版本1.2.23</li>
+                <li>升级core-js到最新版本3.37.1</li>
+                <li>更新HttpUtils中的User-Agent</li>
+                <li>更新compressionPlugin到6.1.2以兼容node18+</li>
+                <li>升级spring-security到安全版本，防止漏洞风险</li>
+                <li>升级spring-framework到安全版本，防止漏洞风险</li>
+                <li>优化自定义XSS注解匹配方式</li>
+                <li>优化缓存监控键名列表排序显示</li>
+                <li>优化定时任务日志默认按时间排序</li>
+                <li>优化默认文件大小超过2G无效的问题</li>
+                <li>优化查表特殊字符使用反斜杠进行转义</li>
+                <li>优化定时任务cron表达式小时配置显示错误问题</li>
+                <li>优化多个自定数据权限使用in查询,避免多次拼接</li>
+                <li>优化导入Excel时设置dictType属性重复查缓存问题</li>
+                <li>其他细节优化</li>
+              </ol>
+            </el-collapse-item>
             <el-collapse-item title="v3.8.7 - 2023-12-08">
               <ol>
                 <li>操作日志记录部门名称</li>
@@ -972,14 +975,8 @@
             </div>
           </template>
           <div class="body">
-            <img
-              src="@/assets/images/pay.png"
-              alt="donate"
-              style="width:100%"
-            />
-            <span style="display: inline-block; height: 30px; line-height: 30px"
-              >你可以请作者喝杯咖啡表示鼓励</span
-            >
+            <img src="@/assets/images/pay.png" alt="donate" style="width:100%" />
+            <span style="display: inline-block; height: 30px; line-height: 30px">你可以请作者喝杯咖啡表示鼓励</span>
           </div>
         </el-card>
       </el-col>
@@ -988,7 +985,7 @@
 </template>
 
 <script setup name="Index">
-const version = ref('3.8.7')
+const version = ref('3.8.8')
 
 function goTarget(url) {
   window.open(url, '__blank')
@@ -1003,12 +1000,14 @@ function goTarget(url) {
     font-size: 17.5px;
     border-left: 5px solid #eee;
   }
+
   hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
     border-top: 1px solid #eee;
   }
+
   .col-item {
     margin-bottom: 20px;
   }
@@ -1018,7 +1017,11 @@ function goTarget(url) {
     margin: 0;
   }
 
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "open sans",
+  "Helvetica Neue",
+  Helvetica,
+  Arial,
+  sans-serif;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;
@@ -1058,4 +1061,3 @@ function goTarget(url) {
   }
 }
 </style>
-

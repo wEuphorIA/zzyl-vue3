@@ -148,7 +148,6 @@ function buildRules(conf, ruleList) {
     if (conf.regList && Array.isArray(conf.regList)) {
       conf.regList.forEach((item) => {
         if (item.pattern) {
-          console.log(item.pattern);
           rules.push(
             `{ pattern: new RegExp(${item.pattern}), message: '${
               item.message
@@ -223,14 +222,14 @@ function buildBeforeUpload(conf) {
   if (conf.fileSize) {
     rightSizeCode = `let isRightSize = file.size / ${unitNum} < ${conf.fileSize}
     if(!isRightSize){
-      ElMessage.error('文件大小超过 ${conf.fileSize}${conf.sizeUnit}')
+      proxy.$modal.msgError('文件大小超过 ${conf.fileSize}${conf.sizeUnit}')
     }`
     returnList.push('isRightSize')
   }
   if (conf.accept) {
     acceptCode = `let isAccept = new RegExp('${conf.accept}').test(file.type)
     if(!isAccept){
-      ElMessage.error('应该选择${conf.accept}类型的文件')
+      proxy.$modal.msgError('应该选择${conf.accept}类型的文件')
     }`
     returnList.push('isAccept')
   }
@@ -275,9 +274,8 @@ function buildexport(
   props,
   methods
 ) {
-  console.log('props', props)
   let str = `
-    import { ElMessage } from 'element-plus'
+    const { proxy } = getCurrentInstance()
     const ${conf.formRef} = ref()
     const data = reactive({
       ${conf.formModel}: {

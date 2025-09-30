@@ -1,59 +1,27 @@
 <template>
   <div class="app-container">
-    <el-form
-      :model="queryParams"
-      ref="queryRef"
-      :inline="true"
-      v-show="showSearch"
-      label-width="68px"
-    >
+    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="名称" prop="planName">
-        <el-input
-          v-model="queryParams.planName"
-          placeholder="请输入名称"
-          clearable
-          @keyup.enter="handleQuery"
-        />
+        <el-input v-model="queryParams.planName" placeholder="请输入名称" clearable @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select
-          v-model="queryParams.status"
-          placeholder="请选择状态"
-          clearable
-        >
-          <el-option
-            v-for="dict in nursing_project_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+        <el-select v-model="queryParams.status" placeholder="请选择" clearable style="width: 240px">
+          <el-option v-for="dict in nursing_plan_status" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery"
-          >搜索</el-button
-        >
+        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          >新增</el-button
-        >
+        <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
       </el-col>
     </el-row>
 
-    <el-table
-      v-loading="loading"
-      :data="planList"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table v-loading="loading" :data="planList" @selection-change="handleSelectionChange">
       <el-table-column label="序号" type="index" width="50" />
       <el-table-column label="名称" align="center" prop="planName" />
       <el-table-column label="状态" align="center" prop="status">
@@ -63,117 +31,50 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        label="创建时间"
-        align="center"
-        prop="createTime"
-        width="180"
-      >
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template #default="scope">
           <span>{{
             parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}')
           }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        align="center"
-        fixed="right"
-        width="280"
-        class-name="small-padding fixed-width"
-      >
+      <el-table-column label="操作" align="center" fixed="right" width="280" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button
-            link
-            type="primary"
-            icon="Edit"
-            :class="scope.row.count ? 'disabled' : ''"
-            @click="handleUpdate(scope.row)"
-            >修改</el-button
-          >
-          <el-button
-            link
-            type="primary"
-            icon="Delete"
-            :class="scope.row.count ? 'disabled' : ''"
-            @click="handleDelete(scope.row)"
-            >删除</el-button
-          >
-          <el-button
-            link
-            type="primary"
-            icon="view"
-            @click="handleLook(scope.row)"
-            >查看</el-button
-          >
-          <el-button
-            link
-            type="primary"
-            :icon="scope.row.status == 0 ? 'Unlock' : 'lock'"
-            @click="handleEnable(scope.row)"
-            >{{ scope.row.status == 1 ? '禁用' : '启用' }}</el-button
-          >
+          <el-button link type="primary" icon="Edit" :class="scope.row.count ? 'disabled' : ''"
+            @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button link type="primary" icon="Delete" :class="scope.row.count ? 'disabled' : ''"
+            @click="handleDelete(scope.row)">删除</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleLook(scope.row)">查看</el-button>
+          <el-button link type="primary" :icon="scope.row.status == 0 ? 'Unlock' : 'lock'"
+            @click="handleEnable(scope.row)">{{ scope.row.status == 1 ? '禁用' : '启用' }}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getNursingPalnList"
-    />
+    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize" @pagination="getNursingPlanList" />
 
     <!-- //////////////////////////////// -->
-    <el-dialog
-      :title="title"
-      v-model="dialogVisible"
-      width="840"
-      @close="cancel()"
-    >
-      <el-form
-        ref="planRef"
-        :model="formData"
-        :rules="rules"
-        label-width="120px"
-      >
+    <el-dialog title="新增护理计划" v-model="dialogVisible" width="840" @close="cancel()">
+      <el-form ref="planRef" :model="formData" :rules="rules" label-width="120px">
         <el-row gutter="10">
           <el-col :span="24" class="elcolFlex">
             <el-form-item label="护理计划名称：" prop="planName">
-              <el-input
-                v-model="formData.planName"
-                :disabled="isLook"
-              ></el-input>
+              <el-input v-model="formData.planName" :disabled="isLook"></el-input>
             </el-form-item>
-            
             <el-form-item label="状态：" prop="status">
               <el-radio-group v-model="formData.status" :disabled="isLook">
-                <el-radio
-                  v-for="dict in nursing_project_status"
-                  :value="dict.value"
-                  :label="dict.value"
-                  :key="dict.value"
-                  >{{ dict.label }}</el-radio
-                >
+                <el-radio v-for="dict in nursing_plan_status" :value="dict.value" :label="dict.value"
+                  :key="dict.value">{{
+                  dict.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
-
             <el-form-item label="排序：" prop="sortNo">
-              <el-input-number
-                :disabled="isLook"
-                v-model="formData.sortNo"
-                :min="0"
-                large-number
-                :max="999999"
-                :decimal-places="0"
-                @blur="textBlurNo"
-                @change="textBlurNo"
-              ></el-input-number>
+              <el-input-number :disabled="isLook" v-model="formData.sortNo" :min="0" large-number :max="999999"
+                :decimal-places="0" @blur="textBlurNo" @change="textBlurNo"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
-
         <el-form-item label="护理项目：" prop="price">
           <div class="info family">
             <div class="tableHead">
@@ -184,67 +85,34 @@
               <div v-if="!isLook">操作</div>
             </div>
             <div class="tableBody">
-              <div
-                class="tableColumn"
-                v-for="(item, index) in nursingPalnList"
-                :key="index"
-              >
+              <div class="tableColumn" v-for="(item, index) in nursingPlanList" :key="index">
                 <div class="column">
-                  <el-select
-                    :disabled="isLook"
-                    v-model="item.projectId"
-                    placeholder="请选择"
-                  >
-                    <el-option
-                      v-for="item in nursingProjectOptions"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
+                  <el-select :disabled="isLook" v-model="item.projectId" placeholder="请选择">
+                    <el-option v-for="item in nursingProjectOptions" :key="item.value" :label="item.label"
+                      :value="item.value"></el-option>
                   </el-select>
                 </div>
                 <div class="column">
-                  <el-time-picker
-                    v-model="item.executeTime"
-                    format="HH:mm:ss"
-                    value-format="HH:mm:ss"
-                    :style="{ width: '100%' }"
-                    placeholder="请选择时间选择"
-                    :disabled="isLook"
-                    clearable
-                  ></el-time-picker>
+                  <el-time-picker v-model="item.executeTime" format="HH:mm:ss" value-format="HH:mm:ss"
+                    :style="{ width: '100%' }" placeholder="请选择时间选择" :disabled="isLook" clearable></el-time-picker>
                 </div>
                 <div class="column">
-                  <el-select
-                    v-model="item.executeCycle"
-                    placeholder="请选择"
-                    :disabled="isLook"
-                  >
-                    <el-option
-                      v-for="item in executeCycleOptions"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
+                  <el-select v-model="item.executeCycle" placeholder="请选择" :disabled="isLook">
+                    <el-option v-for="item in executeCycleOptions" :key="item.value" :label="item.label"
+                      :value="item.value"></el-option>
                   </el-select>
                 </div>
                 <div class="column">
-                  <el-input-number
-                    v-model="item.executeFrequency"
-                    :controls="false"
-                    :max="7"
-                    :min="1"
-                    :disabled="isLook"
-                  />
+                  <el-input-number v-model="item.executeFrequency" :controls="false" :max="7" :min="1"
+                    :disabled="isLook" />
                 </div>
                 <div class="column" v-if="!isLook">
-                  <el-icon
-                    v-if="nursingPalnList.length > 1"
-                    @click="handleRowDel(item, index)"
-                    class="delect"
-                    ><Minus
-                  /></el-icon>
-                  <el-icon @click="handleRowAdd" class="add"><Plus /></el-icon>
+                  <el-icon v-if="nursingPlanList.length > 1" @click="handleRowDel(item, index)" class="delect">
+                    <Minus />
+                  </el-icon>
+                  <el-icon @click="handleRowAdd" class="add">
+                    <Plus />
+                  </el-icon>
                 </div>
               </div>
             </div>
@@ -269,11 +137,11 @@ import {
   updateNursingPlan,
   planStatus,
 } from '@/api/nursing/plan';
-import { getProjectAll } from '@/api/nursing/project';
+import { getAllProjects } from '@/api/nursing/project';
 import { onMounted } from 'vue';
 
 const { proxy } = getCurrentInstance();
-const { nursing_project_status } = proxy.useDict('nursing_project_status');
+const { nursing_plan_status } = proxy.useDict('nursing_plan_status');
 const queryRef = ref(); // 表单
 const planList = ref([]);
 const open = ref(false);
@@ -336,12 +204,12 @@ onMounted(() => {
 
 //查询所有护理项目
 const getAllProjectList = () => {
-  getProjectAll().then((res) => {
+  getAllProjects().then((res) => {
     nursingProjectOptions.value = res.data;
   });
 };
 
-const nursingPalnList = ref([
+const nursingPlanList = ref([
   {
     projectId: '',
     executeTime: '',
@@ -357,16 +225,16 @@ const handleRowAdd = () => {
     executeCycle: '',
     executeFrequency: '',
   };
-  nursingPalnList.value.push(obj);
+  nursingPlanList.value.push(obj);
 };
 //删除行数据
 const handleRowDel = (item, index) => {
-  if (nursingPalnList.value.length === 1) return;
-  nursingPalnList.value.splice(index, 1);
+  if (nursingPlanList.value.length === 1) return;
+  nursingPlanList.value.splice(index, 1);
 };
 
 /** 查询护理计划列表 */
-function getNursingPalnList() {
+function getNursingPlanList() {
   loading.value = true;
   listNursingPlan(queryParams.value).then((response) => {
     planList.value = response.rows;
@@ -389,7 +257,7 @@ function reset() {
     status: '1',
     sortNo: 1,
   };
-  nursingPalnList.value = [
+  nursingPlanList.value = [
     {
       projectId: '',
       executeTime: '',
@@ -397,19 +265,18 @@ function reset() {
       executeFrequency: '1',
     },
   ];
-  console.log(nursingPalnList.value);
+  console.log(nursingPlanList.value);
   // proxy.resetForm('planRef');
 }
 
 /** 搜索按钮操作 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
-  getNursingPalnList();
+  getNursingPlanList();
 }
 
 /** 重置按钮操作 */
 function resetQuery() {
-  dialogVisible.value = false;
   proxy.resetForm("queryRef");
   handleQuery();
 }
@@ -429,7 +296,6 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   const _id = row.id || ids.value;
-  title.value = '修改护理计划';
   getDetails(_id);
 }
 // 获取详情
@@ -437,19 +303,20 @@ const getDetails = (id) => {
   getNursingPlan(id).then((response) => {
     formData.value = response.data;
     formData.value.status = String(formData.value.status);
-    nursingPalnList.value = formData.value.projectPlans;
+    nursingPlanList.value = formData.value.projectPlans;
     dialogVisible.value = true;
+    title.value = '修改护理计划';
   });
 };
 /** 提交按钮 */
 function submitForm() {
   //判断选择的护理项目是否有重复的
-  if (hasDuplicateIds(nursingPalnList.value)) {
+  if (hasDuplicateIds(nursingPlanList.value)) {
     // 提示重复
     proxy.$modal.msgError('请勿选择重复的护理项目');
     return;
   }
-  formData.value['projectPlans'] = nursingPalnList.value;
+  formData.value['projectPlans'] = nursingPlanList.value;
   console.log(formData.value);
 
   proxy.$refs['planRef'].validate((valid) => {
@@ -458,13 +325,13 @@ function submitForm() {
         updateNursingPlan(formData.value).then((response) => {
           proxy.$modal.msgSuccess('修改成功');
           cancel();
-          getNursingPalnList();
+          getNursingPlanList();
         });
       } else {
         addNursingPlan(formData.value).then((response) => {
           proxy.$modal.msgSuccess('新增成功');
           cancel();
-          getNursingPalnList();
+          getNursingPlanList();
         });
       }
     }
@@ -516,7 +383,7 @@ const handleEnable = async (row) => {
       // 执行更新操作
       await planStatus(param);
       // 刷新列表
-      getNursingPalnList();
+      getNursingPlanList();
       // 成功消息
       proxy.$modal.msgSuccess(`${info}成功`);
     }
@@ -535,10 +402,10 @@ function handleDelete(row) {
       return delNursingPlan(_ids);
     })
     .then(() => {
-      getNursingPalnList();
+      getNursingPlanList();
       proxy.$modal.msgSuccess('删除成功');
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 //监听排序
 const textBlurNo = () => {
@@ -553,11 +420,10 @@ const textBlurNo = () => {
 };
 // 查看
 const handleLook = (row) => {
-  title.value = '护理计划详细信息';
   isLook.value = true;
   dialogVisible.value = true;
   getDetails(row.id);
 };
-getNursingPalnList();
+getNursingPlanList();
 </script>
 <style src="./index.scss" lang="scss"></style>

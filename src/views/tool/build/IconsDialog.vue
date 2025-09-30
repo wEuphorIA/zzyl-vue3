@@ -22,7 +22,8 @@
 </template>
 <script setup>
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { watch } from 'vue';
+import { watch } from 'vue'
+
 const iconList = ref([])
 const originList = []
 const key = ref('')
@@ -34,12 +35,9 @@ for (const [key] of Object.entries(ElementPlusIconsVue)) {
   originList.push(key)
 }
 
-function onOpen() {
-
-}
+function onOpen() { }
 function onClose() { }
 function onSelect(icon) {
-
   active.value = icon
   emit('select', icon)
   value.value = false
