@@ -22,7 +22,7 @@
           </div>
           <div class="info-item">
             <h1 class="label-wt">性别：</h1>
-            <span>{{ baseData.gender === 0 ? '男' : '女' }}</span>
+            <span>{{ baseData.gender === 0 ? '女' : '男' }}</span>
           </div>
           <div class="info-item">
             <h1 class="label-wt-long">体检机构：</h1>
