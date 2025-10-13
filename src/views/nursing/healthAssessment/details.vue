@@ -22,7 +22,7 @@
           </div>
           <div class="info-item">
             <h1 class="label-wt">性别：</h1>
-            <span>{{ baseData.gender === 0 ? '女' : '男' }}</span>
+            <span>{{ baseData.gender === 0 ? '男' : '女' }}</span>
           </div>
           <div class="info-item">
             <h1 class="label-wt-long">体检机构：</h1>
@@ -35,7 +35,14 @@
           <div class="info-item">
             <h1 class="label-wt-long">体检报告：</h1>
             <span>{{ baseData.elderName }}的体检报告.pdf
-              <i><a class="font-bt" :href="baseData.physicalReportUrl" target="black">查看</a></i>
+              <i
+                ><a
+                  class="font-bt"
+                  :href="baseData.physicalReportUrl"
+                  target="black"
+                  >查看</a
+                ></i
+              >
             </span>
           </div>
         </div>
@@ -77,7 +84,14 @@
           <div class="info-item startTop">
             <h1 class="label-wt-long">分析报告：</h1>
             <span>{{ baseData.elderName }}的分析报告.pdf
-              <i><a class="font-bt" :href="baseData.analysisReportUrl" target="black">查看</a></i>
+              <i
+                ><a
+                  class="font-bt"
+                  :href="baseData.analysisReportUrl"
+                  target="black"
+                  >查看</a
+                ></i
+              >
             </span>
           </div>
           <div class="info-item startTop">
@@ -119,8 +133,12 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="结论" prop="conclusion" />
-          <el-table-column label="项目名称" prop="examinationItem" width="200" />
+          <el-table-column label="结论" prop="conclusion"/>
+          <el-table-column
+            label="项目名称"
+            prop="examinationItem"
+            width="200"
+          />
           <el-table-column label="检查结果" prop="result" />
           <el-table-column label="参考值" prop="referenceValue" />
           <el-table-column label="单位" prop="unit" />
@@ -172,17 +190,16 @@ const getDataBeforeSpecialChar = (str, specialChar) => {
   width: 100%;
   height: 400px;
 
-  &>div {
+  & > div {
     &:first-child {
       width: 100% !important;
 
-      &>canvas {
+      & > canvas {
         width: 100% !important;
       }
     }
   }
 }
-
 .echartsBox {
   display: flex;
 }

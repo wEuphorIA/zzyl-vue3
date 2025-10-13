@@ -251,6 +251,7 @@ onMounted(() => {
 .popup-main {
     position: relative;
     margin: 10px auto;
+    background: #fff;
     border-radius: 5px;
     font-size: 12px;
     overflow: hidden;

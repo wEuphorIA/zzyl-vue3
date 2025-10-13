@@ -4,29 +4,29 @@
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="合同名称" prop="contractName">
-                    <el-input v-model="formData.contractName" :readonly="type === 'read'" type="text"
-                        placeholder="请输入合同名称" clearable :style="{ width: '100%' }"></el-input>
+                    <el-input v-model="formData.contractName" :readonly="type === 'read'" type="text" placeholder="请输入合同名称" clearable
+                        :style="{ width: '100%' }"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="签约日期" prop="signDate">
-                    <el-date-picker type="datetime" :readonly="type === 'read'" v-model="formData.signDate"
-                        format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }"
-                        placeholder="请选择签约日期" clearable></el-date-picker>
+                    <el-date-picker type="datetime" :readonly="type === 'read'" v-model="formData.signDate" format="YYYY-MM-DD HH:mm:ss"
+                        value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }" placeholder="请选择签约日期"
+                        clearable></el-date-picker>
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="丙方姓名" prop="thirdPartyName">
-                    <el-input v-model="formData.thirdPartyName" :readonly="type === 'read'" type="text"
-                        placeholder="请输入丙方姓名" clearable :style="{ width: '100%' }"></el-input>
+                    <el-input v-model="formData.thirdPartyName" :readonly="type === 'read'" type="text" placeholder="请输入丙方姓名" clearable
+                        :style="{ width: '100%' }"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="丙方联系方式" prop="thirdPartyPhone">
-                    <el-input v-model="formData.thirdPartyPhone" :readonly="type === 'read'" type="text"
-                        placeholder="请输入丙方联系方式" clearable :style="{ width: '100%' }"></el-input>
+                    <el-input v-model="formData.thirdPartyPhone" :readonly="type === 'read'" type="text" placeholder="请输入丙方联系方式" clearable
+                        :style="{ width: '100%' }"></el-input>
                 </el-form-item>
             </el-col>
 
@@ -38,9 +38,11 @@
                         {{ formData.elderName }}的入住合同.pdf
                         <a :href="formData.agreementPath" class="searchPdf">查看</a>
                     </div>
-                    <el-upload v-else ref="agreementPath" :file-list="agreementPathfileList"
-                        :action="agreementPathAction" :before-upload="agreementPathBeforeUpload" accept=".pdf"
-                        :headers="headers" :on-success="(res) => handleSuccess(res)" :on-remove="handleRemove">
+                    <el-upload v-else ref="agreementPath" :file-list="agreementPathfileList" :action="agreementPathAction"
+                        :before-upload="agreementPathBeforeUpload" accept=".pdf" 
+                        :headers="headers" 
+                        :on-success="(res) => handleSuccess(res)"
+                        :on-remove="handleRemove">
                         <el-button size="small" type="primary" icon="el-icon-upload">点击上传</el-button>
                         <div slot="tip" class="el-upload__tip">只能上传不超过 2MB 的文件</div>
                     </el-upload>
@@ -111,7 +113,7 @@ function agreementPathBeforeUpload(file) {
 const props = defineProps({
     transactFormInfo: {
         type: Object,
-        default: () => { }
+        default: () => {}
     },
     type: {
         type: String,
@@ -125,7 +127,7 @@ watch(
         formData.value = props.transactFormInfo;
     },
     { immediate: true }
-);
+); 
 
 
 //上传成功之后给属性pdfUrl赋值
@@ -142,7 +144,7 @@ const emit = defineEmits(['getFormData']);
 // 监听formData的变化，并在变化时触发getFormData自定义事件，将新值传递给父组件
 watch((formData.value), (val) => {
     emit('getFormData', val)
-}, { immediate: true })
+},{ immediate: true })
 // 将rules对象暴露给父组件使用
 defineExpose({
     rules

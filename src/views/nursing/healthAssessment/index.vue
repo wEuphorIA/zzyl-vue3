@@ -1,79 +1,193 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryRef"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="老人姓名" prop="elderName">
-        <el-input v-model="queryParams.elderName" placeholder="请输入老人姓名" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.elderName"
+          placeholder="请输入老人姓名"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="身份证号" prop="idCard">
-        <el-input v-model="queryParams.idCard" placeholder="请输入身份证号" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.idCard"
+          placeholder="请输入身份证号"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
-      <el-form-item label="入住情况" prop="admissionStatus" style="width: 200px;">
-        <el-select v-model="queryParams.admissionStatus" placeholder="请选择入住情况" clearable>
-          <el-option v-for="dict in admission_status" :key="dict.value" :label="dict.label" :value="dict.value" />
+      <el-form-item label="入住情况" prop="admissionStatus">
+        <el-select
+          v-model="queryParams.admissionStatus"
+          placeholder="请选择入住情况"
+          clearable
+        >
+          <el-option
+            v-for="dict in admission_status"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery"
+          >搜索</el-button
+        >
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="newBtn mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="handleAdd">上传体检报告</el-button>
+        <el-button type="primary" plain icon="Plus" @click="handleAdd"
+          >上传体检报告</el-button
+        >
       </el-col>
     </el-row>
 
-    <el-table v-loading="loading" :data="healthAssessmentList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="healthAssessmentList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column label="序号" align="center" type="index" width="55" />
-      <el-table-column label="老人姓名" align="center" prop="elderName" width="180" />
-      <el-table-column label="身份证号" align="center" prop="idCard" width="180" />
+      <el-table-column
+        label="老人姓名"
+        align="center"
+        prop="elderName"
+        width="180"
+      />
+      <el-table-column
+        label="身份证号"
+        align="center"
+        prop="idCard"
+        width="180"
+      />
       <el-table-column label="健康评分" align="center" prop="healthScore" />
-      <el-table-column label="建议入住" align="center" prop="suggestionForAdmission">
+      <el-table-column
+        label="建议入住"
+        align="center"
+        prop="suggestionForAdmission"
+      >
         <template #default="scope">
           {{ scope.row.suggestionForAdmission === 0 ? '建议' : '不建议' }}
         </template>
       </el-table-column>
-      <el-table-column label="推荐护理等级" align="center" prop="nursingLevelName" width="180" />
+      <el-table-column
+        label="推荐护理等级"
+        align="center"
+        prop="nursingLevelName"
+        width="180"
+      />
       <el-table-column label="入住情况" align="center" prop="admissionStatus">
         <template #default="scope">
           {{ scope.row.admissionStatus === 0 ? '已入住' : '未入住' }}
         </template>
       </el-table-column>
-      <el-table-column label="总检日期" align="center" prop="totalCheckDate" width="180" />
-      <el-table-column label="评估时间" align="center" prop="assessmentTime" width="180">
+      <el-table-column
+        label="总检日期"
+        align="center"
+        prop="totalCheckDate"
+        width="180"
+      />
+      <el-table-column
+        label="评估时间"
+        align="center"
+        prop="assessmentTime"
+        width="180"
+      >
         <template #default="scope">
           <span>{{ parseTime(scope.row.assessmentTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="操作"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template #default="scope">
-          <el-button link type="primary" icon="ZoomIn" @click="handleUpdate(scope.row)">查看</el-button>
+          <el-button
+            link
+            type="primary"
+            icon="ZoomIn"
+            @click="handleUpdate(scope.row)"
+            >查看</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改健康评估对话框 -->
-    <el-dialog title="上传体检报告" v-model="open" @close="cancel" width="600px" append-to-body>
+    <el-dialog
+      title="上传体检报告"
+      v-model="open"
+      @close="cancel"
+      width="600px"
+      append-to-body
+    >
       <div>
         <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
           <el-form-item label="老人姓名：" prop="elderName">
-            <el-input v-model="form.elderName" maxlength="10" show-word-limit placeholder="请输入老人姓名" />
+            <el-input
+              v-model="form.elderName"
+              maxlength="10"
+              show-word-limit
+              placeholder="请输入老人姓名"
+              @input="handleBlur"
+            />
           </el-form-item>
           <el-form-item label="老人身份证号：" prop="idCard">
-            <el-input v-model="form.idCard" maxlength="18" show-word-limit placeholder="请输入身份证号" />
+            <el-input
+              v-model="form.idCard"
+              maxlength="18"
+              show-word-limit
+              placeholder="请输入身份证号"
+              @input="handleBlur"
+            />
           </el-form-item>
           <el-form-item label="体检单位：" prop="physicalExamInstitution">
-            <el-input v-model="form.physicalExamInstitution" maxlength="10" show-word-limit placeholder="请输入体检机构" />
+            <el-input
+              v-model="form.physicalExamInstitution"
+              maxlength="10"
+              show-word-limit
+              placeholder="请输入体检机构"
+              @input="handleBlur"
+            />
           </el-form-item>
           <el-form-item label="体检报告：" prop="physicalReportUrl">
-            <el-upload ref="pdfUrl" v-model:file-list="pdfUrlfileList" :action="pdfUrlAction" :headers="headers"
-              :data="{ idCardNo: form.idCard }" accept=".pdf" :limit="1" :auto-upload="true" :multiple="false"
-              :on-success="handleSuccess" :on-remove="() => handleRemove()" :before-upload="pdfUrlBeforeUpload"
-              :on-exceed="handleExceed">
+            <el-upload
+              ref="pdfUrl"
+              v-model:file-list="pdfUrlfileList"
+              :action="pdfUrlAction"
+              :headers="headers"
+              :data="{ idCardNo: form.idCard }"
+              accept=".pdf"
+              :limit="1"
+              :auto-upload="true"
+              :multiple="false"
+              :on-success="handleSuccess"
+              :on-remove="() => handleRemove()"
+              :before-upload="pdfUrlBeforeUpload"
+              :on-exceed="handleExceed"
+              :disabled="isDisabled"
+              :class="isDisabled ? 'disabled' : ''"
+            >
               <el-button size="small" type="primary">点击上传</el-button>
               <template #tip>
                 <span class="fontCol">请上传pdf文件，大小在60M以内</span>
@@ -94,7 +208,9 @@
       </div>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
+          <el-button type="primary" @click="submitForm" :disabled="!isClick"
+            >确 定</el-button
+          >
           <el-button @click="cancel">取 消</el-button>
         </div>
       </template>
@@ -126,6 +242,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref('');
+const isDisabled = ref(true);
 // 上传请求路径
 const pdfUrlAction = ref('/dev-api/nursing/healthAssessment/upload');
 const headers = {
@@ -136,6 +253,7 @@ const updateLoading = ref(false); //图片上传中
 const formRef = ref();
 const pdfUrlfileList = ref([]);
 const pdfUrl = ref(null);
+const isClick =ref(false) //是否可以触发确定按钮
 const data = reactive({
   form: {},
   queryParams: {
@@ -180,6 +298,17 @@ const data = reactive({
 
 const { queryParams, form, rules } = toRefs(data);
 
+const handleBlur = () => {
+  if (
+    form.value.elderName &&
+    form.value.idCard &&
+    form.value.physicalExamInstitution
+  ) {
+    isDisabled.value = false;
+  } else {
+    isDisabled.value = true;
+  }
+};
 /** 查询健康评估列表 */
 function getList() {
   loading.value = true;
@@ -260,13 +389,21 @@ const handleExceed = (files) => {
 };
 //上传文件成功的处理
 const handleSuccess = (res) => {
-  form.value.physicalReportUrl = res.url;
-  formRef.value.validateField('physicalReportUrl');
+  console.log(res);
+  if (res.code === 200) {
+    isClick.value = true;
+    form.value.physicalReportUrl = res.url;
+    formRef.value.validateField('physicalReportUrl');
+  } else {
+    isClick.value = false;
+  }
 };
 
 //删除文件的处理
 const handleRemove = () => {
   form.value.physicalReportUrl = '';
+  isClick.value = false
+  isDisabled.value = false
 };
 /** 提交按钮 */
 function submitForm() {
@@ -289,7 +426,6 @@ getList();
 </script>
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.module.scss';
-
 .update {
   position: absolute;
   width: 100%;
@@ -297,7 +433,6 @@ getList();
   top: 0;
   left: 0;
   background: rgba(#fff, 0.8);
-
   .updateLoad {
     width: 300px;
     height: 300px;
@@ -305,7 +440,6 @@ getList();
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     .bigBg {
       background: url(@/assets/images/bigbg.png) no-repeat;
       background-size: contain;
@@ -315,7 +449,6 @@ getList();
       animation: animationRight 5s infinite linear;
       top: 0;
     }
-
     .smallBg {
       background: url(@/assets/images/smallbg.png) no-repeat;
       background-size: contain;
@@ -325,7 +458,6 @@ getList();
       animation: animationLeft 3s infinite linear;
       top: 0;
     }
-
     .textInfo {
       position: absolute;
       left: 51%;
@@ -333,7 +465,6 @@ getList();
       transform: translate(-50%, -50%);
       color: $--color-link;
       line-height: 28px;
-
       .text {
         font-size: 46px;
         font-weight: 600;
@@ -346,17 +477,14 @@ getList();
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
 }
-
 @keyframes animationLeft {
   from {
     transform: rotate(360deg);
   }
-
   to {
     transform: rotate(0deg);
   }

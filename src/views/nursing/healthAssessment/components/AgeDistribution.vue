@@ -5,6 +5,7 @@
 <script setup>
 import { ref, watch, nextTick, onMounted } from 'vue';
 import * as echarts from 'echarts';
+import { number } from 'echarts/core';
 
 const props = defineProps({
   allDateArr: {
@@ -21,7 +22,7 @@ const props = defineProps({
   },
   baseData: {
     type: Object,
-    default: () => { },
+    default: () => {},
   },
 });
 // 创建一个erchart线图
@@ -186,24 +187,24 @@ const setOption = () => {
           markPoint:
             sid === ageIndex
               ? {
-                data: [
-                  {
-                    type: 'max',
-                    name: 'Max',
-                    symbol: 'circle',
-                    symbolSize: 10,
-                    // symbol: 'image://url/to/your/image.png', // 自定义图标，使用图片
-                    //   symbolSize: [30, 30] // 图标大小，可以是单独的宽度或高度
-                    value: '当前位置',
-                    coord: [newAge, healthScore],
-                    label: {
-                      show: true,
-                      position: 'top',
+                  data: [
+                    {
+                      type: 'max',
+                      name: 'Max',
+                      symbol: 'circle',
+                      symbolSize: 10,
+                      // symbol: 'image://url/to/your/image.png', // 自定义图标，使用图片
+                      //   symbolSize: [30, 30] // 图标大小，可以是单独的宽度或高度
+                      value: '当前位置',
+                      coord: [newAge, healthScore],
+                      label: {
+                        show: true,
+                        position: 'top',
+                      },
+                      itemStyle: { color: '#8e0606' },
                     },
-                    itemStyle: { color: '#8e0606' },
-                  },
-                ],
-              }
+                  ],
+                }
               : {},
         };
       }

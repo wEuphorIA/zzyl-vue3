@@ -7,16 +7,16 @@ let someSpanIsNot24
 export function dialogWrapper(str) {
   return `<el-dialog v-model="dialogVisible"  @open="onOpen" @close="onClose" title="Dialog Titile">
     ${str}
-    <template #footer>
+    <div slot="footer">
       <el-button @click="close">取消</el-button>
-	  <el-button type="primary" @click="handelConfirm">确定</el-button>
-    </template>
+      <el-button type="primary" @click="handelConfirm">确定</el-button>
+    </div>
   </el-dialog>`
 }
 
 export function vueTemplate(str) {
   return `<template>
-    <div class="app-container">
+    <div>
       ${str}
     </div>
   </template>`

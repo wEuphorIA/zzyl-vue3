@@ -1,20 +1,41 @@
 <!-- 执行弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog title="新增执行记录" v-model="formVisible" class="elDialogBox" @close="onClickCloseBtn">
+    <el-dialog
+      title="新增执行记录"
+      v-model="formVisible"
+      class="elDialogBox"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="queryRef" :model="formData" :rules="rules" label-width="108px">
+        <el-form
+          ref="queryRef"
+          :model="formData"
+          :rules="rules"
+          label-width="108px"
+        >
           <el-form-item label="执行时间：" name="estimatedServerTime">
-            <el-date-picker v-model="formData.estimatedServerTime" type="datetime" placeholder=""
-              :default-time="defaultTime" />
+            <el-date-picker
+              v-model="formData.estimatedServerTime"
+              type="datetime"
+              placeholder=""
+              :default-time="defaultTime"
+            />
           </el-form-item>
           <el-form-item label="执行图片：" name="taskImage">
             <image-upload v-model="formData.taskImage" />
           </el-form-item>
           <el-form-item label="执行记录：" name="mark">
-            <el-input v-model="formData.mark" type="textarea" class="wt-400" placeholder="请输入" show-word-limit
-              :maxlength="100" resize="none">
+            <el-input
+              v-model="formData.mark"
+              type="textarea"
+              class="wt-400"
+              placeholder="请输入"
+              show-word-limit
+              :maxlength="100"
+              resize="none"
+            >
             </el-input>
           </el-form-item>
         </el-form>

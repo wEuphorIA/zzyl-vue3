@@ -10,7 +10,7 @@ import { number } from 'echarts/core';
 const props = defineProps({
   systemScore: {
     type: Array,
-    default: () => { },
+    default: () => {},
   },
 });
 // 创建一个erchart线图
@@ -137,7 +137,7 @@ const setOption = () => {
       type: 'text',
       left: 'center',
       top: 'center',
-      z: 100,
+      z:100,
       style: {
         text: '0', // 这里的数字需要计算出数据的平均值然后替换
         textAlign: 'center',

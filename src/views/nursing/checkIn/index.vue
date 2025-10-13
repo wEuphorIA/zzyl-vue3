@@ -2,10 +2,20 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="老人姓名" prop="elderName">
-        <el-input v-model="queryParams.elderName" placeholder="请输入老人姓名" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.elderName"
+          placeholder="请输入老人姓名"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="身份证号" prop="idCardNo">
-        <el-input v-model="queryParams.idCardNo" placeholder="请输入身份证号" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.idCardNo"
+          placeholder="请输入身份证号"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -15,8 +25,13 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="toDetails"
-          v-hasPermi="['nursing:checkIn:add']">发起入住申请</el-button>
+        <el-button
+          type="primary"
+          plain
+          icon="Plus"
+          @click="toDetails"
+          v-hasPermi="['nursing:checkIn:add']"
+        >发起入住申请</el-button>
       </el-col>
     </el-row>
 
@@ -28,11 +43,10 @@
       <el-table-column label="护理等级名称" align="center" prop="nursingLevelName" />
       <el-table-column label="入住期限" align="center" prop="startDate" width="180">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.startDate, '{y}-{m}-{d}') }} ~ {{ parseTime(scope.row.endDate, '{y}-{m}-{d}')
-            }}</span>
+          <span>{{ parseTime(scope.row.startDate, '{y}-{m}-{d}') }} ~ {{ parseTime(scope.row.endDate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" align="center" prop="status">
+      <el-table-column label="状态" align="center" prop="status" >
         <template #default="scope">
           <el-tag v-if="scope.row.status === 0" type="success">已入住</el-tag>
           <el-tag v-else-if="scope.row.status === 1" type="danger">已退住</el-tag>
@@ -45,19 +59,24 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" @click="getDetails(scope.row, 'read')"
-            v-hasPermi="['elder:checkIn:edit']">查看</el-button>
+          <el-button link type="primary" 
+          @click="getDetails(scope.row, 'read')" v-hasPermi="['elder:checkIn:edit']">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
-
-    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-      @pagination="getList" />
+    
+    <pagination
+      v-show="total>0"
+      :total="total"
+      v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize"
+      @pagination="getList"
+    />
   </div>
 </template>
 
 <script setup name="CheckIn">
-import { listCheckIn } from "@/api/nursing/checkIn";
+import { listCheckIn  } from "@/api/nursing/checkIn";
 
 const { proxy } = getCurrentInstance();
 
@@ -186,7 +205,7 @@ function resetQuery() {
 }
 
 //解决页面不刷新的问题
-watch(route, (to, from) => {
+watch(route,(to,from) => {
   proxy.$router.go(0);
 })
 getList();

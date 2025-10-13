@@ -1,18 +1,35 @@
 <!-- 楼层新增编辑弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog :title="pageTitle + '楼层'" v-model="formVisible" @close="onClickCloseBtn">
+    <el-dialog
+      :title="pageTitle + '楼层'"
+      v-model="formVisible"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
         <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
           <el-form-item label="楼层名称：" prop="name">
-            <el-input v-model="formData.name" class="wt-400" placeholder="请输入" clearable show-limit-number
-              :maxlength="5">
+            <el-input
+              v-model="formData.name"
+              class="wt-400"
+              placeholder="请输入"
+              clearable
+              show-limit-number
+              :maxlength="5"
+            >
             </el-input>
           </el-form-item>
           <el-form-item label="排序：" prop="code">
-            <el-input-number v-model="formData.code" :min="minNumber" large-number :max="maxNumber" :decimal-places="0"
-              @blur="textBlurNo" @change="textBlurNo"></el-input-number>
+            <el-input-number
+              v-model="formData.code"
+              :min="minNumber"
+              large-number
+              :max="maxNumber"
+              :decimal-places="0"
+              @blur="textBlurNo"
+              @change="textBlurNo"
+            ></el-input-number>
           </el-form-item>
 
           <!-- <el-form-item class="dialog-footer">
@@ -33,8 +50,13 @@
         </el-form>
         <div class="dialog-footer">
           <el-button @click="onClickCloseBtn">取 消</el-button>
-          <el-button v-if="formData.id" class="bt-red wt-60" :class="roomVoList.length > 0 ? 'bt-forbid' : ''"
-            type="button" @click="handleDelete(formData.id)">
+          <el-button
+            v-if="formData.id"
+            class="bt-red wt-60"
+            :class="roomVoList.length > 0 ? 'bt-forbid' : ''"
+            type="button"
+            @click="handleDelete(formData.id)"
+          >
             <span>删除</span>
           </el-button>
           <el-button type="primary" @click="onSubmit">确 定</el-button>
@@ -159,7 +181,7 @@ const onSubmit = () => {
 const handleClear = () => {
   // 重置表单
   proxy.resetForm('formRef');
-  //   fromRef.value.reset();
+//   fromRef.value.reset();
   formData.value.code = 1;
 };
 // 点击取消关闭

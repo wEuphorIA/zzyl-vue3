@@ -20,7 +20,6 @@ const scrollWrapper = computed(() => proxy.$refs.scrollContainer.$refs.wrapRef);
 onMounted(() => {
   scrollWrapper.value.addEventListener('scroll', emitScroll, true)
 })
-
 onBeforeUnmount(() => {
   scrollWrapper.value.removeEventListener('scroll', emitScroll)
 })
@@ -30,7 +29,6 @@ function handleScroll(e) {
   const $scrollWrapper = scrollWrapper.value;
   $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4
 }
-
 const emits = defineEmits()
 const emitScroll = () => {
   emits('scroll')

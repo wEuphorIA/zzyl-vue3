@@ -2,13 +2,32 @@
 
 <template>
   <div class="dialog-form">
-    <el-dialog v-model="formVisible" title="设置护理员" @close="onClickCloseBtn">
+    <el-dialog
+      v-model="formVisible"
+      title="设置护理员"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="formRef" :model="formData" :rules="rules" :label-width="120">
+        <el-form
+          ref="formRef"
+          :model="formData"
+          :rules="rules"
+          :label-width="120"
+        >
           <el-form-item label="护理员姓名：" prop="bedNumber">
-            <el-select v-model="formData.bedNumber" multiple placeholder="请选择" class="wt-400">
-              <el-option v-for="item in data" :key="item.userId" :label="item.nickName" :value="item.userId">
+            <el-select
+              v-model="formData.bedNumber"
+              multiple
+              placeholder="请选择"
+              class="wt-400"
+            >
+              <el-option
+                v-for="item in data"
+                :key="item.userId"
+                :label="item.nickName"
+                :value="item.userId"
+              >
                 {{ item.nickName }}
               </el-option>
             </el-select>
@@ -91,9 +110,9 @@ watch(
 watch(
   () => formData.value.bedNumber,
   (val) => {
-    if (val.length > 4) {
-      formData.value.bedNumber = val.slice(0, 4);
-    }
+      if (val.length > 4) {
+        formData.value.bedNumber = val.slice(0,4);
+      }
   }
 );
 // 定义方法

@@ -33,7 +33,10 @@
         </div>
       </el-card>
       <!-- 护理项目 -->
-      <el-card header="护理项目" :class="baseData.status === 1 ? 'noBottomLine' : ''">
+      <el-card
+        header="护理项目"
+        :class="baseData.status === 1 ? 'noBottomLine' : ''"
+      >
         <div class="info-block">
           <div class="info-item">
             <h1 class="label-wt-long">护理项目名称：</h1>
@@ -45,8 +48,8 @@
               baseData.status === 1
                 ? '待执行'
                 : baseData.status === 2
-                  ? '已执行'
-                  : '已取消'
+                ? '已执行'
+                : '已取消'
             }}</span>
           </div>
           <div class="info-item">
@@ -79,7 +82,11 @@
             <div class="info-item">
               <h1 class="label-wt-long">执行图片：</h1>
               <span class="img">
-                <img alt="test" :src="baseData.taskImage" class="tdesign-demo-image-viewer__ui-image--img" />
+                <img
+                    alt="test"
+                    :src="baseData.taskImage"
+                    class="tdesign-demo-image-viewer__ui-image--img"
+                  />
               </span>
             </div>
             <div class="info-item">
@@ -92,7 +99,7 @@
       <!-- end -->
       <!-- 取消记录 -->
       <div v-if="baseData.status === 3">
-        <el-card header="取消记录">
+          <el-card header="取消记录">
           <div class="info-block">
             <div class="info-item">
               <h1 class="label-wt-long">取消人：</h1>
@@ -118,7 +125,7 @@
 // 接口
 import {
   getNursingTask,
-} from '@/api/nursing/task';
+} from '@/api/nursing/nursingTask';
 
 // ------定义变量------
 const route = useRoute(); // 获取局部

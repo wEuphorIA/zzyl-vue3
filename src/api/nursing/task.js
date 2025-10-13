@@ -13,7 +13,7 @@ export function listNursingTask(query) {
 // 查询护理任务详细信息
 export function getNursingTask(id) {
   return request({
-    url: '/nursing/task/'+id,
+    url: '/nursing/task/' + id,
     method: 'get'
   });
 }
@@ -23,7 +23,7 @@ export function cancelPlan(params) {
   return request({
     url: `/nursing/task/cancel`,
     method: 'put',
-    data:params
+    data: params
   });
 }
 
@@ -32,7 +32,7 @@ export function executePlan(params) {
   return request({
     url: `/nursing/task/do`,
     method: 'put',
-    data:params
+    data: params
   });
 }
 
@@ -41,6 +41,6 @@ export function changePlanTime(params) {
   return request({
     url: `/nursing/task/updateTime`,
     method: 'put',
-    data:params
+    data: params
   });
 }

@@ -9,23 +9,44 @@
             <span>{{ baseData.deviceName }}</span>
           </div>
           <div class="info-item">
+            <h1 class="label-wt">设备标识码：</h1>
+            <span>{{ baseData.nodeId }}</span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">设备ID：</h1>
+            <span>{{ baseData.iotId }}</span>
+          </div>
+          <div class="info-item">
             <h1 class="label-wt">所属产品：</h1>
             <span>{{ baseData.productName }} </span>
           </div>
           <div class="info-item">
-            <h1 class="label-wt">DeviceSecret：</h1>
-            <span>{{ baseData.deviceSecret }} </span>
-          </div>
-          <div class="info-item">
-            <h1 class="label-wt">ProductKey：</h1>
-            <span>{{ baseData.productKey }}</span>
+            <h1 class="label-wt">密钥：</h1>
+            <span>{{ baseData.secret }} </span>
           </div>
           <div class="info-item">
             <h1 class="label-wt">设备状态：</h1>
-            <span><span v-if="baseData.status === 'ONLINE'" class="bt-small">在线</span>
-              <span v-else-if="baseData.status === 'OFFLINE'" class="undefinedBtn">离线</span>
-              <span v-else-if="baseData.status === 'UNACTIVE'" class="undefinedBtn">未激活</span>
-              <span v-else class="forbidBtn">已禁用</span></span>
+            <span
+              ><span v-if="baseData.deviceStatus === 'ONLINE'" class="bt-small"
+                >在线</span
+              >
+              <span
+                v-else-if="baseData.deviceStatus === 'OFFLINE'"
+                class="undefinedBtn"
+                >离线</span
+              >
+              <span
+                v-else-if="baseData.deviceStatus === 'ABNORMAL'"
+                class="undefinedBtn"
+                >异常</span
+              >
+              <span
+                v-else-if="baseData.deviceStatus === 'INACTIVE'"
+                class="undefinedBtn"
+                >未激活</span
+              >
+              <span v-else class="forbidBtn">已冻结</span></span
+            >
           </div>
           <div class="info-item">
             <h1 class="label-wt">接入位置：</h1>
@@ -33,86 +54,69 @@
               <span v-if="locationData.length === 1">{{
                 locationData[0]
               }}</span>
-              <span v-if="locationData.length === 2">{{ locationData[0] }}-{{ locationData[1] }}</span>
-              <span v-if="locationData.length === 3">{{ locationData[0] }}-{{ locationData[1] }}-{{
-                locationData[2]
-              }}</span>
+              <span v-if="locationData.length === 2"
+                >{{ locationData[0] }}-{{ locationData[1] }}</span
+              >
+              <span v-if="locationData.length === 3"
+                >{{ locationData[0] }}-{{ locationData[1] }}-{{
+                  locationData[2]
+                }}</span
+              >
             </span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">设备类型：</h1>
+            <span>{{ baseData.locationType === 0 ? '随身设备' : '固定设备' }}</span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">节点类型：</h1>
+            <span>直连设备</span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">认证类型：</h1>
+            <span>密钥</span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">创建时间：</h1>
+            <span>{{ baseData.createTime }}</span>
+          </div>
+          <div class="info-item">
+            <h1 class="label-wt">激活时间：</h1>
+            <span>{{ baseData.activeTime ? baseData.activeTime : '--' }}</span>
           </div>
         </div>
       </el-card>
     </div>
     <!-- end -->
     <div ref="mainHeight" class="bg-wt min-steph height mt-24">
-      <SwitchBar ref="tabBar" :data="facilityTabData" @change-id="changeId"></SwitchBar>
-      <!-- 设备详情 -->
-      <div v-if="activeIndex === 0">
-        <el-card title="">
-          <div class="info-block">
-            <div class="info-item">
-              <h1>设备名称：</h1>
-              <span>{{ baseData.deviceName }}</span>
-            </div>
-            <div class="info-item">
-              <h1>备注名称：</h1>
-              <span>{{ baseData.nickname }}</span>
-            </div>
-            <div class="info-item">
-              <h1>设备类型：</h1>
-              <span>{{
-                baseData.locationType === 0 ? '随身设备' : '固定设备'
-              }}</span>
-            </div>
-            <div class="info-item">
-              <h1>地域：</h1>
-              <span>{{ baseData.region }}</span>
-            </div>
-            <div class="info-item">
-              <h1>节点类型：</h1>
-              <span>{{ baseData.nodeType === 0 ? '直连设备' : '网关' }}</span>
-            </div>
-            <div class="info-item">
-              <h1>认证方式：</h1>
-              <span>设备密钥</span>
-            </div>
-            <div class="info-item">
-              <h1>IP地址：</h1>
-              <span>{{ baseData.ipAddress ? baseData.ipAddress : '--' }}</span>
-            </div>
-            <div class="info-item">
-              <h1>固件版本：</h1>
-              <span>{{
-                baseData.firmwareVersion ? baseData.firmwareVersion : '--'
-              }}</span>
-            </div>
-            <div class="info-item">
-              <h1>创建人：</h1>
-              <span>{{ baseData.creator ? baseData.creator : '--' }}</span>
-            </div>
-            <div class="info-item">
-              <h1>创建时间：</h1>
-              <span>{{ baseData.gmtCreate }}</span>
-            </div>
-            <div class="info-item">
-              <h1>激活时间：</h1>
-              <span>{{ baseData.gmtActive ? baseData.gmtActive : '--' }}</span>
-            </div>
-          </div>
-        </el-card>
-      </div>
-      <!-- end -->
+      <SwitchBar
+        ref="tabBar"
+        :data="facilityTabData"
+        @change-id="changeId"
+      ></SwitchBar>
       <!-- 物模型数据 -->
-      <div v-if="activeIndex === 1">
+      <div v-if="activeIndex === 0">
         <div class="modelBox">
           <div class="modelL">
-            <SwitchTabBar ref="tabBar" :data="modelTabData" @change-id="changeModelId"></SwitchTabBar>
+            <SwitchTabBar
+              ref="tabBar"
+              :data="modelTabData"
+              @change-id="changeModelId"
+            ></SwitchTabBar>
             <div class="modelList">
               <ul>
-                <li :class="isActive === 0 ? 'active' : ''" @click="handleActive(0)">
+                <li
+                  :class="isActive === 0 ? 'active' : ''"
+                  @click="handleActive(0)"
+                >
                   默认模块
                 </li>
-                <li v-for="(item, index) in itemData" :key="index" :class="isActive === index + 1 ? 'active' : ''"
-                  @click="handleActive(index + 1, item)">
+                <li
+                  v-for="(item, index) in itemData"
+                  :key="index"
+                  :class="isActive === index + 1 ? 'active' : ''"
+                  @click="handleActive(index + 1, item)"
+                >
                   <p>{{ item.functionBlockName }}</p>
                   <p>标识符：{{ item.functionBlockId }}</p>
                 </li>
@@ -120,40 +124,83 @@
             </div>
           </div>
           <div class="modelR">
-            <el-table v-loading="loading" :data="publishedData" @selection-change="onPageChange">
-              <el-table-column label="序号" type="index" align="center" width="55" />
-              <el-table-column label="标识符" align="center" prop="identifier" width="180" />
-              <el-table-column label="功能名称" align="center" prop="name" width="180" />
-              <el-table-column label="更新时间" align="center" prop="time">
+            <el-table
+              v-loading="loading"
+              :data="publishedData"
+              @selection-change="onPageChange"
+            >
+              <el-table-column
+                label="序号"
+                type="index"
+                align="center"
+                width="55"
+              />
+              <el-table-column
+                label="标识符"
+                align="center"
+                prop="functionId"
+                width="180"
+              />
+              <el-table-column label="更新时间" align="center" prop="eventTime">
                 <template #default="scope">
                   <span>{{
-                    scope.row.time ? parseTime(scope.row.time, '{y}-{m}-{d} {h}:{i}:{s}') : '--'
+                    scope.row.eventTime?parseTime(scope.row.eventTime, '{y}-{m}-{d} {h}:{i}:{s}'):'--'
                   }}</span>
                 </template>
               </el-table-column>
-              <el-table-column label="数据值" align="center" prop="value" width="150">
+              <el-table-column
+                label="数据值"
+                align="center"
+                prop="value"
+                width="150"
+              >
                 <template #default="scope">
-                  {{ scope.row.value }}
+                  {{ scope.row.value}}
                 </template>
               </el-table-column>
-              <el-table-column fixed="right" label="操作" align="center" class-name="small-padding fixed-width"
-                width="200">
+              <el-table-column
+                fixed="right"
+                label="操作"
+                align="center"
+                class-name="small-padding fixed-width"
+                width="200"
+              >
                 <template #default="scope">
-                  <el-button link type="primary" icon="ZoomIn" @click="handleDetails(scope.row)">查看数据</el-button>
+                  <el-button
+                    link
+                    type="primary"
+                    icon="ZoomIn"
+                    @click="handleDetails(scope.row)"
+                    >查看数据</el-button
+                  >
                 </template>
               </el-table-column>
             </el-table>
 
-            <pagination v-show="pagination.total > 0" :total="pagination.total" v-model:page="pagination.pageNum"
-              v-model:limit="pagination.pageSize" @pagination="getPropertyStatus" />
+            <pagination
+              v-show="pagination.total > 0"
+              :total="pagination.total"
+              v-model:page="pagination.pageNum"
+              v-model:limit="pagination.pageSize"
+              @pagination="getPropertyStatus"
+            />
           </div>
         </div>
       </div>
       <!-- end -->
     </div>
-    <LookData :dialogVisible="dialogVisible" :dialog-data="listLookData" :pagination="paginationLook"
-      :nextValid="nextValid" :preValid="preValid" :total="total" @handle-search="handleLookSearch"
-      @handle-close-dialog="handleCloseDialog" @get-list="getLookList" @onPage="onPage"></LookData>
+    <LookData
+      :dialogVisible="dialogVisible"
+      :dialog-data="listLookData"
+      :pagination="paginationLook"
+      :nextValid="nextValid"
+      :preValid="preValid"
+      :total="total"
+      @handle-search="handleLookSearch"
+      @handle-close-dialog="handleCloseDialog"
+      @get-list="getLookList"
+      @onPage="onPage"
+    ></LookData>
   </div>
 </template>
 <script setup>
@@ -166,8 +213,8 @@ import { getNum } from '@/utils/validate';
 // 接口
 import {
   getDevice,
-  getPublishedList,
-  getPropertyStatusList,
+  // getPublishedList,
+  getPropertyServiceList,
   getDataList,
 } from '@/api/nursing/device';
 // tab切换
@@ -244,22 +291,22 @@ const getDetails = async () => {
     if (baseData.value.remark) {
       locationData.value = baseData.value.remark.split(',');
     }
-    getPublished(baseData.value); // 获取详情的同时获取运行状态，需要把详情数据传给运行状态
+    getPropertyStatus(baseData.value); // 获取详情的同时获取运行状态，需要把详情数据传给运行状态
   }
 };
-// 获取运行状态
-const getPublished = async (val) => {
-  const params = {
-    productKey: productKey.value, // 产品key
-  };
-  const res = await getPublishedList(params); // 获取列表数据
-  if (res.code === 200) {
-    const data = JSON.parse(res.data.thingModelJson);
-    itemData.value = data.functionBlocks;
-    // 获取运行状态的接口
-    getPropertyStatus(val);
-  }
-};
+// // 获取运行状态
+// const getPublished = async (val) => {
+//   const params = {
+//     productKey: productKey.value, // 产品key
+//   };
+//   const res = await getPublishedList(params); // 获取列表数据
+//   if (res.code === 200) {
+//     const data = JSON.parse(res.data.thingModelJson);
+//     itemData.value = data.functionBlocks;
+//     // 获取运行状态的接口
+//     getPropertyStatus(val);
+//   }
+// };
 // 详情运行状态状态的卡片
 const getPropertyStatus = async (basedata) => {
   statusObj.value = {
@@ -267,9 +314,10 @@ const getPropertyStatus = async (basedata) => {
     deviceName: basedata.deviceName,
     productKey: productKey.value,
   };
-  const res = await getPropertyStatusList(statusObj.value); // 获取列表数据
+  
+  const res = await getPropertyServiceList(basedata.iotId); // 获取列表数据
   if (res.code === 200) {
-    const data = res.data.list.propertyStatusInfo;
+    const data = res.data;
     publishedData.value = data;
   }
 };
@@ -284,7 +332,7 @@ const getLookList = async (val) => {
   }
 };
 // 时间筛选分页回到第一页
-const onPage = () => {
+const onPage = ()=>{
   paginationLook.value.pageNum = 1
 }
 // tab切换

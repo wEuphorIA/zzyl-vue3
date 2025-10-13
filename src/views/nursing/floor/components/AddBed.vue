@@ -1,18 +1,40 @@
 <!-- 楼层新增编辑弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog :title="pageTitle + '床位'" v-model="formVisible" @close="onClickCloseBtn">
+    <el-dialog
+      :title="pageTitle + '床位'"
+      v-model="formVisible"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
+        <el-form
+          ref="formRef"
+          :model="formData"
+          :rules="rules"
+          label-width="100px"
+        >
           <el-form-item label="床位名称：" prop="bedNumber">
-            <el-input v-model="formData.bedNumber" class="wt-400" placeholder="请输入" clearable show-limit-number
-              :maxlength="10">
+            <el-input
+              v-model="formData.bedNumber"
+              class="wt-400"
+              placeholder="请输入"
+              clearable
+              show-limit-number
+              :maxlength="10"
+            >
             </el-input>
           </el-form-item>
           <el-form-item label="排序：" prop="sort">
-            <el-input-number v-model="formData.sort" :min="minNumber" large-number :max="maxNumber" :decimal-places="0"
-              @blur="textBlurNo" @change="textBlurNo"></el-input-number>
+            <el-input-number
+              v-model="formData.sort"
+              :min="minNumber"
+              large-number
+              :max="maxNumber"
+              :decimal-places="0"
+              @blur="textBlurNo"
+              @change="textBlurNo"
+            ></el-input-number>
           </el-form-item>
         </el-form>
         <div class="dialog-footer">

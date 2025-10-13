@@ -1,12 +1,26 @@
 <!-- 改期弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog title="修改执行时间" v-model="formVisible" class="elDialogBox" @close="onClickCloseBtn">
+    <el-dialog
+      title="修改执行时间"
+      v-model="formVisible"
+      class="elDialogBox"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="queryRef" :model="formData" :rules="rules" label-width="120px">
-          <el-form-item label="期望服务时间：" name="estimatedServerTime"><el-date-picker
-              v-model="formData.estimatedServerTime" type="datetime" placeholder="" />
+        <el-form
+          ref="queryRef"
+          :model="formData"
+          :rules="rules"
+          label-width="120px"
+        >
+          <el-form-item label="期望服务时间：" name="estimatedServerTime"
+            ><el-date-picker
+              v-model="formData.estimatedServerTime"
+              type="datetime"
+              placeholder=""
+            />
           </el-form-item>
         </el-form>
       </div>

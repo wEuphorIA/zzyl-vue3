@@ -7,7 +7,7 @@
                v-model="queryParams.userName"
                placeholder="请输入用户名称"
                clearable
-               style="width: 180px"
+               style="width: 200px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
@@ -16,7 +16,7 @@
                v-model="queryParams.phonenumber"
                placeholder="请输入手机号码"
                clearable
-               style="width: 180px"
+               style="width: 200px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
@@ -91,17 +91,14 @@ function show() {
   getList();
   visible.value = true;
 }
-
 /**选择行 */
 function clickRow(row) {
   proxy.$refs["refTable"].toggleRowSelection(row);
 }
-
 // 多选框选中数据
 function handleSelectionChange(selection) {
   userIds.value = selection.map(item => item.userId);
 }
-
 // 查询表数据
 function getList() {
   unallocatedUserList(queryParams).then(res => {
@@ -109,19 +106,16 @@ function getList() {
     total.value = res.total;
   });
 }
-
 /** 搜索按钮操作 */
 function handleQuery() {
   queryParams.pageNum = 1;
   getList();
 }
-
 /** 重置按钮操作 */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
-
 const emit = defineEmits(["ok"]);
 /** 选择授权用户操作 */
 function handleSelectUser() {
@@ -133,8 +127,10 @@ function handleSelectUser() {
   }
   authUserSelectAll({ roleId: roleId, userIds: uIds }).then(res => {
     proxy.$modal.msgSuccess(res.msg);
-    visible.value = false;
-    emit("ok");
+    if (res.code === 200) {
+      visible.value = false;
+      emit("ok");
+    }
   });
 }
 

@@ -1,7 +1,12 @@
 <!-- 查看房间弹窗 -->
 <template>
   <div class="dialogBox dialogTable roomDialog">
-    <el-dialog v-model="visible" title="房间详情" :footer="false" @close="handleClose">
+    <el-dialog
+      v-model="visible"
+      title="房间详情"
+      :footer="false"
+      @close="handleClose"
+    >
       <div>
         <div class="roomDetails">
           <ul>
@@ -18,24 +23,56 @@
               入住床位数：<label>{{ data.occupiedBeds }}</label>
             </li>
             <li>
-              入住率：<label class="font-bt5">{{
-                data.occupancyRate === 0
-                  ? 0
-                  : (data.occupancyRate * 100).toFixed(2)
-              }}%</label>
+              入住率：<label class="font-bt5"
+                >{{
+                  data.occupancyRate === 0
+                    ? 0
+                    : (data.occupancyRate * 100).toFixed(2)
+                }}%</label
+              >
             </li>
           </ul>
         </div>
         <!-- table 数据 -->
-        <div class="scrollTable" :class="showPageTip ? 'heighta' : 'dialogHeight'">
-          <el-table id="app" ref="tableRef" row-key="id" :data="bedData ? bedData : []"
-            :scroll="{ type: 'virtual', rowHeight: 48, bufferSize: 10 }" :height="400"
-            :v-loading="bedData > 0 ? loadingNode : ''" @scroll="handleScroll($event)">
-            <el-table-column label="床位号" align="center" prop="老人姓名" width="180" />
-            <el-table-column label="老人姓名" align="center" prop="deviceName" width="180" />
-            <el-table-column label="护理等级" align="center" prop="deviceName" width="180" />
+        <div
+          class="scrollTable"
+          :class="showPageTip ? 'heighta' : 'dialogHeight'"
+        >
+          <el-table
+            id="app"
+            ref="tableRef"
+            row-key="id"
+            :data="bedData ? bedData : []"
+            :scroll="{ type: 'virtual', rowHeight: 48, bufferSize: 10 }"
+            :height="400"
+            :v-loading="bedData > 0 ? loadingNode : ''"
+            @scroll="handleScroll($event)"
+          >
+            <el-table-column
+              label="床位号"
+              align="center"
+              prop="老人姓名"
+              width="180"
+            />
+            <el-table-column
+              label="老人姓名"
+              align="center"
+              prop="deviceName"
+              width="180"
+            />
+            <el-table-column
+              label="护理等级"
+              align="center"
+              prop="deviceName"
+              width="180"
+            />
             <!-- 入住期限 -->
-            <el-table-column label="入住期限" align="center" prop="locationType" width="180">
+            <el-table-column
+              label="入住期限"
+              align="center"
+              prop="locationType"
+              width="180"
+            >
               <template #default="scope">
                 {{ getDateInfo(scope.row.checkInConfigVo.checkInStartTime) }}~{{
                   getDateInfo(scope.row.checkInConfigVo.checkInEndTime)

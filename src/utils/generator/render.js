@@ -122,6 +122,7 @@ export default defineComponent({
         }
       })
     }
+    // console.log(childObjs);
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (dataObject[key]) {
@@ -131,11 +132,19 @@ export default defineComponent({
       } else if (!isNotProps(key)) {
         dataObject.props[key] = val
       }
+      
+      // else {
+      //   dataObject.props[key] = val
+      // }
+      
+      
     })
     if(children.length > 0){
       slot.default = () => children
     }
     
+    // console.log('props', dataObject.props);
+    // resolveComponent(this.conf.tag)
     return h(resolveComponent(this.conf.tag),
       {
         modelValue: this.$attrs.modelValue,

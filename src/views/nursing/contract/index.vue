@@ -2,56 +2,116 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="老人ID" prop="elderId">
-        <el-input v-model="queryParams.elderId" placeholder="请输入老人ID" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.elderId"
+          placeholder="请输入老人ID"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="合同名称" prop="contractName">
-        <el-input v-model="queryParams.contractName" placeholder="请输入合同名称" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.contractName"
+          placeholder="请输入合同名称"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="合同编号" prop="contractNumber">
-        <el-input v-model="queryParams.contractNumber" placeholder="请输入合同编号" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.contractNumber"
+          placeholder="请输入合同编号"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="协议地址" prop="agreementPath">
-        <el-input v-model="queryParams.agreementPath" placeholder="请输入协议地址" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.agreementPath"
+          placeholder="请输入协议地址"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="丙方手机号" prop="thirdPartyPhone">
-        <el-input v-model="queryParams.thirdPartyPhone" placeholder="请输入丙方手机号" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.thirdPartyPhone"
+          placeholder="请输入丙方手机号"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="丙方姓名" prop="thirdPartyName">
-        <el-input v-model="queryParams.thirdPartyName" placeholder="请输入丙方姓名" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.thirdPartyName"
+          placeholder="请输入丙方姓名"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="老人姓名" prop="elderName">
-        <el-input v-model="queryParams.elderName" placeholder="请输入老人姓名" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.elderName"
+          placeholder="请输入老人姓名"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="开始时间" prop="startDate">
-        <el-date-picker clearable v-model="queryParams.startDate" type="date" value-format="YYYY-MM-DD"
+        <el-date-picker clearable
+          v-model="queryParams.startDate"
+          type="date"
+          value-format="YYYY-MM-DD"
           placeholder="请选择开始时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="结束时间" prop="endDate">
-        <el-date-picker clearable v-model="queryParams.endDate" type="date" value-format="YYYY-MM-DD"
+        <el-date-picker clearable
+          v-model="queryParams.endDate"
+          type="date"
+          value-format="YYYY-MM-DD"
           placeholder="请选择结束时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="签约日期" prop="signDate">
-        <el-date-picker clearable v-model="queryParams.signDate" type="date" value-format="YYYY-MM-DD"
+        <el-date-picker clearable
+          v-model="queryParams.signDate"
+          type="date"
+          value-format="YYYY-MM-DD"
           placeholder="请选择签约日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="解除提交人" prop="terminationSubmitter">
-        <el-input v-model="queryParams.terminationSubmitter" placeholder="请输入解除提交人" clearable
-          @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.terminationSubmitter"
+          placeholder="请输入解除提交人"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="解除日期" prop="terminationDate">
-        <el-date-picker clearable v-model="queryParams.terminationDate" type="date" value-format="YYYY-MM-DD"
+        <el-date-picker clearable
+          v-model="queryParams.terminationDate"
+          type="date"
+          value-format="YYYY-MM-DD"
           placeholder="请选择解除日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="解除协议地址" prop="terminationAgreementPath">
-        <el-input v-model="queryParams.terminationAgreementPath" placeholder="请输入解除协议地址" clearable
-          @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.terminationAgreementPath"
+          placeholder="请输入解除协议地址"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="排序编号" prop="sortOrder">
-        <el-input v-model="queryParams.sortOrder" placeholder="请输入排序编号" clearable @keyup.enter="handleQuery" />
+        <el-input
+          v-model="queryParams.sortOrder"
+          placeholder="请输入排序编号"
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -61,20 +121,42 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="handleAdd"
-          v-hasPermi="['nursing:contract:add']">新增</el-button>
+        <el-button
+          type="primary"
+          plain
+          icon="Plus"
+          @click="handleAdd"
+          v-hasPermi="['nursing:contract:add']"
+        >新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate"
-          v-hasPermi="['nursing:contract:edit']">修改</el-button>
+        <el-button
+          type="success"
+          plain
+          icon="Edit"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['nursing:contract:edit']"
+        >修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['nursing:contract:remove']">删除</el-button>
+        <el-button
+          type="danger"
+          plain
+          icon="Delete"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['nursing:contract:remove']"
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="Download" @click="handleExport"
-          v-hasPermi="['nursing:contract:export']">导出</el-button>
+        <el-button
+          type="warning"
+          plain
+          icon="Download"
+          @click="handleExport"
+          v-hasPermi="['nursing:contract:export']"
+        >导出</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -116,16 +198,19 @@
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-            v-hasPermi="['nursing:contract:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-            v-hasPermi="['nursing:contract:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['nursing:contract:edit']">修改</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['nursing:contract:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
-    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-      @pagination="getList" />
+    
+    <pagination
+      v-show="total>0"
+      :total="total"
+      v-model:page="queryParams.pageNum"
+      v-model:limit="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- 添加或修改合同对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
@@ -152,23 +237,37 @@
           <el-input v-model="form.elderName" placeholder="请输入老人姓名" />
         </el-form-item>
         <el-form-item label="开始时间" prop="startDate">
-          <el-date-picker clearable v-model="form.startDate" type="date" value-format="YYYY-MM-DD"
+          <el-date-picker clearable
+            v-model="form.startDate"
+            type="date"
+            value-format="YYYY-MM-DD"
             placeholder="请选择开始时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="结束时间" prop="endDate">
-          <el-date-picker clearable v-model="form.endDate" type="date" value-format="YYYY-MM-DD" placeholder="请选择结束时间">
+          <el-date-picker clearable
+            v-model="form.endDate"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="请选择结束时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="签约日期" prop="signDate">
-          <el-date-picker clearable v-model="form.signDate" type="date" value-format="YYYY-MM-DD" placeholder="请选择签约日期">
+          <el-date-picker clearable
+            v-model="form.signDate"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="请选择签约日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="解除提交人" prop="terminationSubmitter">
           <el-input v-model="form.terminationSubmitter" placeholder="请输入解除提交人" />
         </el-form-item>
         <el-form-item label="解除日期" prop="terminationDate">
-          <el-date-picker clearable v-model="form.terminationDate" type="date" value-format="YYYY-MM-DD"
+          <el-date-picker clearable
+            v-model="form.terminationDate"
+            type="date"
+            value-format="YYYY-MM-DD"
             placeholder="请选择解除日期">
           </el-date-picker>
         </el-form-item>
@@ -387,12 +486,12 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除合同编号为"' + _ids + '"的数据项？').then(function () {
+  proxy.$modal.confirm('是否确认删除合同编号为"' + _ids + '"的数据项？').then(function() {
     return delContract(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => { });
+  }).catch(() => {});
 }
 
 /** 导出按钮操作 */

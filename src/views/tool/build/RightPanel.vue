@@ -476,11 +476,14 @@
 </template>
 
 <script setup>
-import draggable from "vuedraggable/dist/vuedraggable.common"
+import draggable from "vuedraggable/dist/vuedraggable.common";
 import { isNumberStr } from '@/utils/index'
 import IconsDialog from './IconsDialog'
 import TreeNodeDialog from './TreeNodeDialog'
-import { inputComponents, selectComponents } from '@/utils/generator/config'
+import {
+  inputComponents,
+  selectComponents
+} from '@/utils/generator/config'
 
 const { proxy } = getCurrentInstance()
 const dateTimeFormat = {
@@ -594,10 +597,14 @@ const data = reactive({
 
 const { currentTab, currentNode, dialogVisible, iconsVisible, currentIconModel, dateTypeOptions, dateRangeTypeOptions, colorFormatOptions, justifyOptions, layoutTreeProps } = toRefs(data)
 
-const documentLink = computed(() => props.activeData.document || 'https://element-plus.org/zh-CN/guide/installation')
+const documentLink = computed(() => props.activeData.document
+  || 'https://element-plus.org/zh-CN/guide/installation')
 
 const dateOptions = computed(() => {
-  if (props.activeData.type !== undefined && props.activeData.tag === 'el-date-picker') {
+  if (
+    props.activeData.type !== undefined
+    && props.activeData.tag === 'el-date-picker'
+  ) {
     if (props.activeData['start-placeholder'] === undefined) {
       return dateTypeOptions.value
     }
@@ -666,9 +673,19 @@ function renderContent(h, { node, data, store }) {
       })
     ])
   ])
+  // return (
+  //   <div class="custom-tree-node">
+  //     <span>{node.label}</span>
+  //     <span class="node-operation">
+  //       <el-link type="primary" on-click={() => append(data)} icon="Plus" underline={false}></el-link>
+  //       <el-link style="margin-left: 5px;" type="danger" on-click={() => remove(node, data)} icon="Delete" underline={false}></el-link>
+  //     </span>
+  //   </div>
+  // )
 }
 function append(data) {
   if (!data.children) {
+    // this.$set(data, 'children', [])
     data.children = []
   }
   dialogVisible.value = true
@@ -836,6 +853,7 @@ function tagChange(tagIcon) {
   }
 }
 
+
 .select-item {
   display: flex;
   border: 1px dashed #fff;
@@ -906,7 +924,8 @@ function tagChange(tagIcon) {
 .node-icon {
   color: #bebfc3;
 }
-
+</style>
+<style>
 .custom-tree-node {
   flex: 1;
   display: flex;

@@ -2,7 +2,8 @@
   <div class="app-container">
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
+        <el-button type="primary" plain icon="Plus" @click="handleAdd"
+          >新增</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -17,7 +18,7 @@
       <el-table-column label="房型类型" align="center" prop="name" />
       <el-table-column label="床位费用" align="center" prop="price" />
       <!-- 房型介绍，只展示10个字符 -->
-      <el-table-column label="房型介绍" align="center" prop="introduction" width="180">
+      <el-table-column label="房型介绍" align="center" prop="introduction" width="180" >
         <template #default="scope">
           <span>{{ computeLength(scope.row.introduction) }}</span>
         </template>
@@ -29,23 +30,23 @@
       </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
         <template #default="scope">
-          <el-tag :type="scope.row.status == 1 ? 'success' : 'danger'">{{ scope.row.status == 1 ? '启用' : '禁用'
-            }}</el-tag>
+          <el-tag :type="scope.row.status == 1 ? 'success' : 'danger' ">{{ scope.row.status == 1 ? '启用' : '禁用' }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" width="200" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)">删除</el-button>
-          <el-button link type="primary" :icon="scope.row.status == 0 ? 'Unlock' : 'lock'"
-            @click="handleEnable(scope.row)">{{ scope.row.status == 1 ? '禁用' : '启用' }}</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
+            >修改</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
+            >删除</el-button>
+            <el-button link type="primary" :icon="scope.row.status == 0 ? 'Unlock' : 'lock'" @click="handleEnable(scope.row)" >{{ scope.row.status == 1 ? '禁用' : '启用' }}</el-button>
 
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改房型对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
@@ -98,7 +99,7 @@ const title = ref("");
 
 const data = reactive({
   form: {
-    status: 0
+    status:0
   },
   queryParams: {
     pageNum: 1,

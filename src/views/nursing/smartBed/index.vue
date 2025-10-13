@@ -1,23 +1,33 @@
 <template>
   <div class="min-h content-layout">
     <div class="bg-wt">
-      <!-- 楼层tab导航 -->
-      <SwitchBar ref="tabBar" :data="tabData" :route-type="routeType" @change-id="getFloorId"></SwitchBar>
-      <!-- end -->
-      <!-- 房型列表 -->
-      <HouseList :key="floorId" :floorId="floorId" :base-data="roomVoList" :floor-data="tabData"
-        :route-type="routeType"></HouseList>
-      <!-- end -->
-    </div>
+    <!-- 楼层tab导航 -->
+    <SwitchBar
+      ref="tabBar"
+      :data="tabData"
+      :route-type="routeType"
+      @change-id="getFloorId"
+    ></SwitchBar>
+    <!-- end -->
+    <!-- 房型列表 -->
+    <HouseList
+      :key="floorId"
+      :floorId="floorId"
+      :base-data="roomVoList"
+      :floor-data="tabData"
+      :route-type="routeType"
+    ></HouseList>
+    <!-- end -->
+  </div>
   </div>
 </template>
 <script setup>
 import useUserStore from '@/store/modules/user'
 // 接口
-import { listAllDeviceFloor, getRoomBedDeviceList } from '@/api/nursing/floor'
+import { listAllDeviceFloor,getRoomBedDeviceList } from '@/api/nursing/floor'
 // 组件
 // tab切换
-import SwitchBar from '@/components/switchBar/switchBartop.vue'
+import SwitchBar from '@/components/switchBar/SwitchBartop.vue'
 
 // 房型列表
 import HouseList from './components/List.vue'

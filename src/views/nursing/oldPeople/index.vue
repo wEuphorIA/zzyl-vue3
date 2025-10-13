@@ -3,15 +3,32 @@
   <div class="min-h content-layout">
     <div class="bg-wt">
       <!-- 楼层tab导航 -->
-      <SwitchBar ref="tabBar" :data="tabData" :route-type="routeType" @change-id="getFloorId"></SwitchBar>
+      <SwitchBar
+        ref="tabBar"
+        :data="tabData"
+        :route-type="routeType"
+        @change-id="getFloorId"
+      ></SwitchBar>
       <!-- end -->
       <!-- 房型列表 -->
-      <HouseList :base-data="roomVoList" :floor-data="tabData" :route-type="routeType" @handleCheck="handleRoomCheck"
-        @handleSelectOlder="handleSelectOlder" @handleSingleOlder="handleSingleOlder"></HouseList>
+      <HouseList
+        :base-data="roomVoList"
+        :floor-data="tabData"
+        :route-type="routeType"
+        @handleCheck="handleRoomCheck"
+        @handleSelectOlder="handleSelectOlder"
+        @handleSingleOlder="handleSingleOlder"
+      ></HouseList>
       <!-- end -->
       <!--设置 -->
-      <Setting ref="formRef" :visible="checkVisible" :data="nurseList" :singleNurse="singleNurse"
-        @handle-close="handleCheckRoomClose" @handle-submit="handleSubmit"></Setting>
+      <Setting
+        ref="formRef"
+        :visible="checkVisible"
+        :data="nurseList"
+        :singleNurse="singleNurse"
+        @handle-close="handleCheckRoomClose"
+        @handle-submit="handleSubmit"
+      ></Setting>
       <!-- end -->
     </div>
   </div>
@@ -28,7 +45,7 @@ import {
 } from '@/api/nursing/floor';
 // 组件
 // tab切换
-import SwitchBar from '@/components/switchBar/switchBartop.vue';
+import SwitchBar from '@/components/switchBar/SwitchBartop.vue';
 // 房型列表
 import HouseList from './components/List.vue';
 // 设置
@@ -66,12 +83,12 @@ onMounted(() => {
 // ------定义方法------
 // 获取单个设置老人的护理人数据
 const handleSingleOlder = (val) => {
-  console.log(val, 1)
+    console.log(val,1)
   singleNurse.value = val;
 };
 // 获取要设置的老人数据
 const handleSelectOlder = (val) => {
-  console.log(val)
+    console.log(val)
   selectOlder.value = val;
 };
 // 给老人设置护理员
@@ -91,7 +108,7 @@ const handleSubmit = async (val) => {
 };
 // 获取护理员下拉数据
 const getAllUserListFunc = async () => {
-  const res = await getAllUserList({ deptId: '201' });
+  const res = await getAllUserList({ deptId: '211' });
   nurseList.value = res.data;
   //   nurseList.value = res.data.map((item) => {
   //     return { value: item.id, label: item.nickName }

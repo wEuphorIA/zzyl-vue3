@@ -164,7 +164,7 @@
                   <el-radio
                      v-for="dict in sys_normal_disable"
                      :key="dict.value"
-                     :value="dict.value"
+                     :label="dict.value"
                   >{{ dict.label }}</el-radio>
                </el-radio-group>
             </el-form-item>
@@ -305,20 +305,17 @@ function getList() {
     loading.value = false;
   });
 }
-
 /** 搜索按钮操作 */
 function handleQuery() {
   queryParams.value.pageNum = 1;
   getList();
 }
-
 /** 重置按钮操作 */
 function resetQuery() {
   dateRange.value = [];
   proxy.resetForm("queryRef");
   handleQuery();
 }
-
 /** 删除按钮操作 */
 function handleDelete(row) {
   const roleIds = row.roleId || ids.value;
@@ -329,21 +326,18 @@ function handleDelete(row) {
     proxy.$modal.msgSuccess("删除成功");
   }).catch(() => {});
 }
-
 /** 导出按钮操作 */
 function handleExport() {
   proxy.download("system/role/export", {
     ...queryParams.value,
   }, `role_${new Date().getTime()}.xlsx`);
 }
-
 /** 多选框选中数据 */
 function handleSelectionChange(selection) {
   ids.value = selection.map(item => item.roleId);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
-
 /** 角色状态修改 */
 function handleStatusChange(row) {
   let text = row.status === "0" ? "启用" : "停用";
@@ -355,7 +349,6 @@ function handleStatusChange(row) {
     row.status = row.status === "0" ? "1" : "0";
   });
 }
-
 /** 更多操作 */
 function handleCommand(command, row) {
   switch (command) {
@@ -369,19 +362,16 @@ function handleCommand(command, row) {
       break;
   }
 }
-
 /** 分配用户 */
 function handleAuthUser(row) {
   router.push("/system/role-auth/user/" + row.roleId);
 }
-
 /** 查询菜单树结构 */
 function getMenuTreeselect() {
   menuTreeselect().then(response => {
     menuOptions.value = response.data;
   });
 }
-
 /** 所有部门节点数据 */
 function getDeptAllCheckedKeys() {
   // 目前被选中的部门节点
@@ -391,7 +381,6 @@ function getDeptAllCheckedKeys() {
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys);
   return checkedKeys;
 }
-
 /** 重置新增的表单以及其他数据  */
 function reset() {
   if (menuRef.value != undefined) {
@@ -415,7 +404,6 @@ function reset() {
   };
   proxy.resetForm("roleRef");
 }
-
 /** 添加角色 */
 function handleAdd() {
   reset();
@@ -423,7 +411,6 @@ function handleAdd() {
   open.value = true;
   title.value = "添加角色";
 }
-
 /** 修改角色 */
 function handleUpdate(row) {
   reset();
@@ -443,10 +430,9 @@ function handleUpdate(row) {
         });
       });
     });
+    title.value = "修改角色";
   });
-  title.value = "修改角色";
 }
-
 /** 根据角色ID查询菜单树结构 */
 function getRoleMenuTreeselect(roleId) {
   return roleMenuTreeselect(roleId).then(response => {
@@ -454,7 +440,6 @@ function getRoleMenuTreeselect(roleId) {
     return response;
   });
 }
-
 /** 根据角色ID查询部门树结构 */
 function getDeptTree(roleId) {
   return deptTreeSelect(roleId).then(response => {
@@ -462,7 +447,6 @@ function getDeptTree(roleId) {
     return response;
   });
 }
-
 /** 树权限（展开/折叠）*/
 function handleCheckedTreeExpand(value, type) {
   if (type == "menu") {
@@ -477,7 +461,6 @@ function handleCheckedTreeExpand(value, type) {
     }
   }
 }
-
 /** 树权限（全选/全不选） */
 function handleCheckedTreeNodeAll(value, type) {
   if (type == "menu") {
@@ -486,7 +469,6 @@ function handleCheckedTreeNodeAll(value, type) {
     deptRef.value.setCheckedNodes(value ? deptOptions.value : []);
   }
 }
-
 /** 树权限（父子联动） */
 function handleCheckedTreeConnect(value, type) {
   if (type == "menu") {
@@ -495,7 +477,6 @@ function handleCheckedTreeConnect(value, type) {
     form.value.deptCheckStrictly = value ? true : false;
   }
 }
-
 /** 所有菜单节点数据 */
 function getMenuAllCheckedKeys() {
   // 目前被选中的菜单节点
@@ -505,7 +486,6 @@ function getMenuAllCheckedKeys() {
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys);
   return checkedKeys;
 }
-
 /** 提交按钮 */
 function submitForm() {
   proxy.$refs["roleRef"].validate(valid => {
@@ -528,20 +508,17 @@ function submitForm() {
     }
   });
 }
-
 /** 取消按钮 */
 function cancel() {
   open.value = false;
   reset();
 }
-
 /** 选择角色权限范围触发 */
 function dataScopeSelectChange(value) {
   if (value !== "2") {
     deptRef.value.setCheckedKeys([]);
   }
 }
-
 /** 分配数据权限操作 */
 function handleDataScope(row) {
   reset();
@@ -558,10 +535,9 @@ function handleDataScope(row) {
         });
       });
     });
+    title.value = "分配数据权限";
   });
-  title.value = "分配数据权限";
 }
-
 /** 提交按钮（数据权限） */
 function submitDataScope() {
   if (form.value.roleId != undefined) {
@@ -573,7 +549,6 @@ function submitDataScope() {
     });
   }
 }
-
 /** 取消按钮（数据权限）*/
 function cancelDataScope() {
   openDataScope.value = false;

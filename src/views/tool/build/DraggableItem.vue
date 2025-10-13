@@ -17,17 +17,20 @@
       </draggable>
     </el-row>
     <span class="drawing-item-copy" title="复制" @click.stop="copyItem(element)">
-      <el-icon><CopyDocument /></el-icon>
+      <el-icon>
+        <CopyDocument />
+      </el-icon>
     </span>
     <span class="drawing-item-delete" title="删除" @click.stop="deleteItem(index)">
-      <el-icon><Delete /></el-icon>
+      <el-icon>
+        <Delete />
+      </el-icon>
     </span>
   </el-col>
 </template>
 <script setup name="DraggableItem">
 import draggable from "vuedraggable/dist/vuedraggable.common";
 import render from '@/utils/generator/render'
-
 const props = defineProps({
   element: Object,
   index: Number,
@@ -40,12 +43,13 @@ const props = defineProps({
 const className = ref('')
 const draggableItemRef = ref(null)
 const emits = defineEmits(['activeItem', 'copyItem', 'deleteItem'])
-
 function activeItem(item) {
   emits('activeItem', item)
 }
+
 function copyItem(item, parent) {
-  emits('copyItem', item, parent ?? props.drawingList)
+  emits('copyItem', item, parent ?? props.drawingList
+  )
 }
 function deleteItem(item, parent) {
   emits('deleteItem', item, parent ?? props.drawingList)
@@ -56,7 +60,7 @@ function getComponentData() {
     gutter: props.element.gutter,
     justify: props.element.justify,
     align: props.element.align
-  }
+  };
 }
 
 watch(() => props.activeId, (val) => {
@@ -64,5 +68,7 @@ watch(() => props.activeId, (val) => {
   if (props.formConf.unFocusedComponentBorder) {
     className.value += ' unfocus-bordered'
   }
-}, { immediate: true })
+}, {
+  immediate: true
+})
 </script>

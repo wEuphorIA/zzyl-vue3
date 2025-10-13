@@ -4,18 +4,16 @@
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="入住期限" prop="checkInTime">
-                    <el-date-picker type="datetimerange" :readonly="type === 'read'" v-model="checkInTime"
-                        format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }"
-                        start-placeholder="开始日期" end-placeholder="结束日期" range-separator="至" clearable
-                        @change="hendleCheckInTime"></el-date-picker>
+                    <el-date-picker type="datetimerange" :readonly="type === 'read'"  v-model="checkInTime" format="YYYY-MM-DD HH:mm:ss"
+                        value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }" start-placeholder="开始日期"
+                        end-placeholder="结束日期" range-separator="至" clearable @change="hendleCheckInTime"></el-date-picker>
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="费用期限" prop="feeTime">
-                    <el-date-picker type="datetimerange" :readonly="type === 'read'" v-model="feeTime"
-                        format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }"
-                        start-placeholder="开始日期" end-placeholder="结束日期" range-separator="至" clearable
-                        @change="hendleFeeTime"></el-date-picker>
+                    <el-date-picker type="datetimerange" :readonly="type === 'read'"  v-model="feeTime" format="YYYY-MM-DD HH:mm:ss"
+                        value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: '100%' }" start-placeholder="开始日期"
+                        end-placeholder="结束日期" range-separator="至" clearable @change="hendleFeeTime"></el-date-picker>
                 </el-form-item>
             </el-col>
 
@@ -23,8 +21,13 @@
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="护理等级" prop="nursingLevelId">
-                    <el-select v-model="formData.nursingLevelId" :disabled="type === 'read'" placeholder="请选择护理等级"
-                        clearable :style="{ width: '100%' }" @change="handleNursing">
+                    <el-select 
+                    v-model="formData.nursingLevelId" 
+                    :disabled="type === 'read'"
+                    placeholder="请选择护理等级" 
+                    clearable
+                    :style="{ width: '100%' }"
+                    @change="handleNursing">
                         <el-option v-for="(item, index) in nursingLevelIdOptions" :key="index" :label="item.name"
                             :value="item.id" :disabled="item.disabled"></el-option>
                     </el-select>
@@ -36,7 +39,8 @@
                         {{ formData.bedNumber }}
                     </div>
                     <el-cascader v-else v-model="formData.bed" :options="bedIdOptions" :props="bedProps"
-                        @change="handleFloor" :style="{ width: '100%' }" placeholder="请选择入住床位" clearable></el-cascader>
+                    @change="handleFloor"
+                        :style="{ width: '100%' }" placeholder="请选择入住床位" clearable></el-cascader>
                 </el-form-item>
             </el-col>
 
@@ -44,13 +48,13 @@
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="押金" prop="deposit">
-                    <el-input v-model="formData.deposit" :disabled="type === 'read'" type="text" placeholder="请输入押金"
-                        clearable :style="{ width: '100%' }"></el-input>
+                    <el-input v-model="formData.deposit" :disabled="type === 'read'" type="text" placeholder="请输入押金" clearable
+                        :style="{ width: '100%' }"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="护理费用" prop="nursingFee">
-                    <el-input-number v-model="formData.nursingFee" placeholder="护理费用"
+                    <el-input-number v-model="formData.nursingFee"  placeholder="护理费用"
                         :disabled='true'></el-input-number>
                 </el-form-item>
             </el-col>
@@ -64,8 +68,7 @@
             </el-col>
             <el-col :span="12">
                 <el-form-item label="其他费用" prop="otherFees">
-                    <el-input-number v-model="formData.otherFees" :disabled="type === 'read'"
-                        placeholder="其他费用"></el-input-number>
+                    <el-input-number v-model="formData.otherFees"  :disabled="type === 'read'" placeholder="其他费用"></el-input-number>
                 </el-form-item>
             </el-col>
 
@@ -73,14 +76,12 @@
         <el-row gutter="15">
             <el-col :span="12">
                 <el-form-item label="医保支付" prop="insurancePayment">
-                    <el-input-number :disabled="type === 'read'" v-model="formData.insurancePayment"
-                        placeholder="医保支付"></el-input-number>
+                    <el-input-number :disabled="type === 'read'" v-model="formData.insurancePayment" placeholder="医保支付"></el-input-number>
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="政府补贴" prop="governmentSubsidy">
-                    <el-input-number :disabled="type === 'read'" v-model="formData.governmentSubsidy"
-                        placeholder="政府补贴"></el-input-number>
+                    <el-input-number :disabled="type === 'read'" v-model="formData.governmentSubsidy" placeholder="政府补贴"></el-input-number>
                 </el-form-item>
             </el-col>
 
@@ -88,7 +89,7 @@
     </div>
 </template>
 <script setup>
-import { getAllLevels } from '@/api/nursing/level'
+import { getNursingLevelAll } from '@/api/nursing/level'
 import { getFloorBed, getRootById } from '@/api/nursing/floor'
 import {
     ElMessage
@@ -171,18 +172,18 @@ const nursingLevelIdOptions = ref([])
 
 const bedIdOptions = ref([])
 
-onMounted(() => {
+onMounted(()=>{
     //初始化护理等级
-    getAllLevels().then((res) => {
+    getNursingLevelAll().then((res)=>{
         nursingLevelIdOptions.value = res.data;
     })
 
     //初始化楼层房间床位
-    getFloorBed(0).then((res) => {
-        if (res.code === 200) {
-            bedIdOptions.value = res.data;
-        }
-    })
+  getFloorBed(0).then((res) => {
+    if (res.code === 200) {
+      bedIdOptions.value = res.data;
+    }
+  })
 })
 
 
@@ -193,14 +194,14 @@ const handleFloor = (val) => {
     console.log(val)
     formData.value.bedId = val[2];
     getRootById(val[1]).then((res) => {
-        if (res.code === 200) {
-            formData.value.floorName = res.data.floorName;
-            formData.value.floorId = res.data.floorId;
-            formData.value.bedFee = res.data.price;
-            formData.value.price = res.data.price;
-            formData.value.code = res.data.code;
-            formData.value.roomId = res.data.roomId;
-        }
+    if (res.code === 200) {
+        formData.value.floorName = res.data.floorName;
+        formData.value.floorId = res.data.floorId;
+        formData.value.bedFee = res.data.price;
+        formData.value.price = res.data.price;
+        formData.value.code = res.data.code;
+        formData.value.roomId = res.data.roomId;
+    }
     })
 }
 //处理入住时间
@@ -208,7 +209,7 @@ const hendleCheckInTime = (val) => {
     if (val.length > 0) {
         formData.value.startDate = val[0];
         formData.value.endDate = val[1];
-        formData.value.checkInTime = '1'
+        formData.value.checkInTime= '1'
     }
 }
 
@@ -217,22 +218,22 @@ const hendleFeeTime = (val) => {
     if (val.length > 0) {
         formData.value.feeStartDate = val[0];
         formData.value.feeEndDate = val[1];
-        formData.value.feeTime = '1'
+        formData.value.feeTime= '1'
     }
 }
 
 //选择了护理等级之后，触发，给护理费用和护理名称赋值
 const handleNursing = () => {
-    if (formData.value.nursingLevelId) {
-        //根据id从集合中找对应的护理等级对象
-        const obj = nursingLevelIdOptions.value.find((item) => item.id === formData.value.nursingLevelId);
-        console.log(obj)
-        //给属性赋值
-        formData.value.nursingFee = obj.fee;
-        formData.value.nursingLevelName = obj.name;
-    } else {
-        formData.value.nursingCost = null;
-    }
+  if(formData.value.nursingLevelId){
+    //根据id从集合中找对应的护理等级对象
+    const obj = nursingLevelIdOptions.value.find((item) => item.id === formData.value.nursingLevelId);
+    console.log(obj)
+    //给属性赋值
+    formData.value.nursingFee = obj.fee;
+    formData.value.nursingLevelName = obj.name;
+  }else{
+    formData.value.nursingCost = null;
+  }
 }
 
 const bedOptions = ref([])
@@ -243,28 +244,28 @@ const bedProps = ref({
 
 
 const props = defineProps({
-    configInfo: {
-        type: Object,
-        default: {},
-    },
-    type: {
-        type: String,
-        default: '',
-    },
+  configInfo: {
+    type: Object,
+    default: {},
+  },
+  type: {
+    type: String,
+    default: '',
+  },
 });
 
 const checkInTime = ref([]);
 const feeTime = ref([]);
 
 watch(
-    props,
-    () => {
-        formData.value = props.configInfo;
-        formData.value.deposit = 3000;
-        checkInTime.value = [props.configInfo.startDate, props.configInfo.endDate];
-        feeTime.value = [props.configInfo.feeStartDate, props.configInfo.feeEndDate];
-    },
-    { immediate: true }
+  props,
+  () => {
+    formData.value = props.configInfo;
+    formData.value.deposit = 3000;
+    checkInTime.value = [props.configInfo.startDate,props.configInfo.endDate];
+    feeTime.value = [props.configInfo.feeStartDate, props.configInfo.feeEndDate];
+  },
+  { immediate: true }
 );
 
 
@@ -272,13 +273,13 @@ watch(
 const emits = defineEmits(['getFormData']);
 //监听数据变化，传递到父组件
 watch(formData.value, (val) => {
-    //调用父组件的方法
-    emits('getFormData', val)
-}, { immediate: true })
+  //调用父组件的方法
+  emits('getFormData', val)
+},{ immediate: true })
 
 //暴露表单校验的数据给外面，给父组件
 defineExpose({
-    rules
+  rules
 })
 
 </script>

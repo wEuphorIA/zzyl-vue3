@@ -42,8 +42,7 @@
         <div class="roleCon">
           <div class="head"> 
             <div class="img">
-              <!-- <img :src="baseData.avatar ? baseData.avatar : avatar" /> -->
-              <img src="@\assets\images\grzxhz.jpg" />
+              <img :src="baseData.avatar ? baseData.avatar : avatar" />
             </div>
             <div class="rText">
               <p>Hello！{{ baseData.nickName }}</p>

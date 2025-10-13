@@ -1,30 +1,6 @@
 /**
- * 路径匹配器
- * @param {string} pattern
- * @param {string} path
- * @returns {Boolean}
- */
-export function isPathMatch(pattern, path) {
-  const regexPattern = pattern.replace(/\//g, '\\/').replace(/\*\*/g, '.*').replace(/\*/g, '[^\\/]*')
-  const regex = new RegExp(`^${regexPattern}$`)
-  return regex.test(path)
-}
-
-/**
- * 判断value字符串是否为空 
- * @param {string} value
- * @returns {Boolean}
- */
-export function isEmpty(value) {
-  if (value == null || value == "" || value == undefined || value == "undefined") {
-    return true
-  }
-  return false
-}
-
-/**
  * 判断url是否是http或https 
- * @param {string} url
+ * @param {string} path
  * @returns {Boolean}
  */
  export function isHttp(url) {
@@ -99,7 +75,10 @@ export function validEmail(email) {
  * @returns {Boolean}
  */
 export function isString(str) {
-  return typeof str === 'string' || str instanceof String
+  if (typeof str === 'string' || str instanceof String) {
+    return true
+  }
+  return false
 }
 
 /**

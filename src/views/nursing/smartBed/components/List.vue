@@ -1,27 +1,40 @@
 <!--智能床位-->
 <template>
-  <div v-if="floorData.length">
+    <div v-if="floorData.length">
     <!-- end -->
     <!-- 房间列表 -->
     <div v-if="baseData.length" class="houseList">
-      <div v-for="(roomItem, roomindex) in baseData" :key="roomindex" class="item">
+      <div
+        v-for="(roomItem, roomindex) in baseData"
+        :key="roomindex"
+        class="item"
+      >
         <!-- 房间标题 -->
         <div class="title">
           <div class="lText">
             <span class="name">{{ roomItem.code }}</span>
             <div :key="floorId" class="device">
-              <el-popover v-for="(item, index) in roomItem.deviceVos" :key="index" placement="bottom" show-arrow
-                class="devicePopup">
+              <el-popover
+                v-for="(item, index) in roomItem.deviceVos"
+                :key="index"
+                placement="bottom"
+                show-arrow
+                class="devicePopup"
+              >
                 <template #reference>
                   <img :src="getImgSrc(item)" class="device-item" />
                 </template>
                 <div class="product">{{ item.productName || '--' }}</div>
-                <div class="deviceName">{{ item.deviceName }}</div>
+                  <div class="deviceName">{{ item.deviceName }}</div>
               </el-popover>
             </div>
           </div>
           <div v-if="getRoomWuData(roomItem).length" class="wuData">
-            <div v-for="(item, index) in getRoomWuData(roomItem)" :key="index" class="wuDataItem">
+            <div
+              v-for="(item, index) in getRoomWuData(roomItem)"
+              :key="index"
+              class="wuDataItem"
+            >
               <span class="label">{{ item.label }}</span>
               <span class="wuDataVal">{{ getWuKdyVal(item) }}</span>
               <span class="unit">{{ item.unit }}</span>
@@ -31,25 +44,38 @@
         <!--  -->
         <!-- 床位列表 -->
         <div class="bedList">
-          <div v-if="
-            roomItem.bedVoList &&
-            roomItem.bedVoList.length &&
-            !(
-              roomItem.bedVoList.filter((item) => !item.deviceVos.length)
-                .length === roomItem.bedVoList.length
-            )
-          ">
+          <div
+            v-if="
+              roomItem.bedVoList &&
+              roomItem.bedVoList.length &&
+              !(
+                roomItem.bedVoList.filter((item) => !item.deviceVos.length)
+                  .length === roomItem.bedVoList.length
+              )
+            "
+          >
             <ul>
-              <li v-for="(item, index) in roomItem.bedVoList.filter(
-                (item) => item.deviceVos.length
-              )" :key="index" class="leisure" :class="userStore.unusualBedId.includes(item.id) ? 'unusual' : ''
-                  ">
+              <li
+                v-for="(item, index) in roomItem.bedVoList.filter(
+                  (item) => item.deviceVos.length
+                )"
+                :key="index"
+                class="leisure"
+                :class="
+                  userStore.unusualBedId.includes(item.id) ? 'unusual' : ''
+                "
+              >
                 <div class="bedText">
                   <div class="deviceBox">
                     <div>床位号： &nbsp;&nbsp;&ensp;{{ item.bedNumber }}</div>
 
                     <div class="device">
-                      <el-popup v-for="(item1, index1) in item.deviceVos" :key="index1" placement="bottom" show-arrow>
+                      <el-popup
+                        v-for="(item1, index1) in item.deviceVos"
+                        :key="index1"
+                        placement="bottom"
+                        show-arrow
+                      >
                         <template #content>
                           <div class="product">
                             {{ item1.productName || '' }}
@@ -66,17 +92,19 @@
                     老人姓名：&nbsp;{{ item.ename ? item.ename : '--' }}
                   </p>
                   <div v-if="item.bedStatus === 1" class="olderStatus">
-                    <div v-if="
-                      !(
-                        item.deviceVos &&
-                        item.deviceVos.length ===
-                        item.deviceVos.filter(
-                          (item1) =>
-                            !item1.deviceDataVos ||
-                            !item1.deviceDataVos.length
-                        ).length
-                      )
-                    ">
+                    <div
+                      v-if="
+                        !(
+                          item.deviceVos &&
+                          item.deviceVos.length ===
+                            item.deviceVos.filter(
+                              (item1) =>
+                                !item1.deviceDataVos ||
+                                !item1.deviceDataVos.length
+                            ).length
+                        )
+                      "
+                    >
                       <div class="left">
                         <img :src="getSleepStatusImg(item)" />
                         <text class="bedStatus">{{
@@ -85,10 +113,13 @@
                       </div>
                       <div class="right">
                         <div class="top">
-                          <img :src="getWuDataBySleepStatus(item)
-                              ? getWuDataBySleepStatus(item).src
-                              : ''
-                            " />
+                          <img
+                            :src="
+                              getWuDataBySleepStatus(item)
+                                ? getWuDataBySleepStatus(item).src
+                                : ''
+                            "
+                          />
                           <div class="label">
                             {{
                               getWuDataBySleepStatus(item)
@@ -112,10 +143,13 @@
                           </div>
                         </div>
                         <div class="bottom">
-                          <img :src="getWuDataBySleepStatus1(item)
-                              ? getWuDataBySleepStatus1(item).src
-                              : ''
-                            " />
+                          <img
+                            :src="
+                              getWuDataBySleepStatus1(item)
+                                ? getWuDataBySleepStatus1(item).src
+                                : ''
+                            "
+                          />
                           <div class="label">
                             {{
                               getWuDataBySleepStatus1(item)
@@ -156,13 +190,9 @@
       </div>
     </div>
     <!-- end -->
-    <div v-else>
-      <NoData></NoData>
-    </div>
+    <div v-else><NoData></NoData></div>
   </div>
-  <div v-else>
-    <NoData></NoData>
-  </div>
+  <div v-else><NoData></NoData></div>
 </template>
 <script setup>
 import {
@@ -239,13 +269,13 @@ const getSameRoomData = (array1, array2) => {
 // 根据睡眠状态获取对应的心率或者离床次数物模型
 const getWuDataBySleepStatus = (item) => {
   const obj = getRoomWuData(item).filter(
-    (item) => item.functionId === 'shuimianzhuangtai'
+    (item) => item.functionId === 'SleepPhaseState'
   )
   if (obj.length) {
     const arr = getRoomWuData(item).filter(
       (item) =>
         item.functionId ===
-        (obj[0].dataValue === '2' ? 'lichuangcishu' : 'HeartRate')
+        (obj[0].dataValue === '2' ? 'BedExitCount' : 'HeartRate')
     )
     return arr[0]
   }
@@ -254,14 +284,14 @@ const getWuDataBySleepStatus = (item) => {
 // 根据睡眠状态获取对应的呼吸率或者离床时间物模型
 const getWuDataBySleepStatus1 = (item) => {
   const obj = getRoomWuData(item).filter(
-    (item) => item.functionId === 'shuimianzhuangtai'
+    (item) => item.functionId === 'SleepPhaseState'
   )
 
   if (obj.length) {
     const arr = getRoomWuData(item).filter(
       (item) =>
         item.functionId ===
-        (obj[0].dataValue === '2' ? 'lichuangshijian' : 'RespiratoryRate')
+        (obj[0].dataValue === '2' ? 'BedTime' : 'RespiratoryRate')
     )
     return obj[0].dataValue === '2'
       ? { ...arr[0], dataValue: timestampToTime(arr[0]?.dataValue) }
@@ -272,7 +302,7 @@ const getWuDataBySleepStatus1 = (item) => {
 // 获取睡眠状态对应的图片
 const getSleepStatusImg = (item) => {
   const obj = getRoomWuData(item).filter(
-    (item) => item.functionId === 'shuimianzhuangtai'
+    (item) => item.functionId === 'SleepPhaseState'
   )
   if (obj[0]) {
     return sleepStatus[Number(obj[0].dataValue)]?.src
@@ -282,7 +312,7 @@ const getSleepStatusImg = (item) => {
 // 获取睡眠状态对应的文案
 const getSleepStatusText = (item) => {
   const obj = getRoomWuData(item).filter(
-    (item) => item.functionId === 'shuimianzhuangtai'
+    (item) => item.functionId === 'SleepPhaseState'
   )
   if (obj[0]) {
     return sleepStatus[Number(obj[0].dataValue)].value
@@ -311,18 +341,15 @@ const timestampToTime = (timestamp) => {
 <style lang="scss" scoped>
 .houseList {
   display: block;
-
   .item {
     display: block;
     width: auto;
-
     .bedList {
       .leisure {
         background-color: #f6fbfa;
         position: relative;
         width: calc(33.3% - 12px);
         min-height: 178px;
-
         .setting {
           width: 20px;
           height: 20px;
@@ -335,25 +362,20 @@ const timestampToTime = (timestamp) => {
           background-position: center;
           cursor: pointer;
         }
-
         .bedText {
           width: 100%;
-
           .oldName {
             margin-bottom: 24px;
           }
-
-          .olderStatus>div {
+          .olderStatus > div {
             display: flex;
           }
-
           .noPeople {
             text-align: center;
             color: var(--color-bk6);
             display: block;
             margin-top: 35px;
           }
-
           .olderStatus {
             .noPeople {
               text-align: center;
@@ -361,17 +383,14 @@ const timestampToTime = (timestamp) => {
               display: block;
               margin-top: 35px;
             }
-
             .left {
               margin-right: 22px;
               display: flex;
               flex-direction: column;
-
               img {
                 width: 44px;
                 height: 44px;
               }
-
               .bedStatus {
                 font-size: 14px;
                 color: #595959;
@@ -379,36 +398,30 @@ const timestampToTime = (timestamp) => {
                 left: 3px;
               }
             }
-
             .right {
               display: flex;
               flex-direction: column;
               justify-content: space-between;
               position: relative;
               bottom: 7px;
-
               .top,
               .bottom {
                 display: flex;
                 align-items: center;
-
                 img {
                   width: 40px;
                   height: 40px;
                   margin-right: 5px;
                 }
-
                 .label {
                   min-width: 56px;
                   white-space: nowrap;
                 }
-
                 .label,
                 .unit {
                   font-size: 14px;
                   color: #595959;
                 }
-
                 .val {
                   font-size: 24px;
                   color: #262626;
@@ -418,16 +431,13 @@ const timestampToTime = (timestamp) => {
               }
             }
           }
-
           .deviceBox {
             display: flex;
             justify-content: space-between;
-
             .device {
               display: flex;
               align-items: center;
               margin-left: 15px;
-
               .device-item {
                 width: 16px;
                 height: 16px;
@@ -438,7 +448,6 @@ const timestampToTime = (timestamp) => {
           p {
             margin-bottom: 4px;
           }
-
           .care {
             span {
               padding: 2.5px 9.5px;
@@ -446,28 +455,23 @@ const timestampToTime = (timestamp) => {
               font-size: 12px;
               margin-right: 10px;
             }
-
             span:nth-child(1) {
               color: #008d71;
               background-color: #e5f4f2;
             }
-
             span:nth-child(2) {
               color: #395cff;
               background-color: #d8edfd;
             }
-
             span:nth-child(3) {
               color: #fb9b0d;
               background-color: #f4edd1;
             }
-
             span:nth-child(4) {
               color: #ff6800;
               background-color: rgba(#ffcfae, 0.37);
             }
           }
-
           .noCare {
             span {
               padding: 0 !important;
@@ -479,21 +483,17 @@ const timestampToTime = (timestamp) => {
         }
       }
     }
-
     .title {
       .wuData {
         display: flex;
-
         .wuDataItem {
           margin-right: 20px;
         }
       }
-
       .device {
         display: flex;
         align-items: center;
         margin-left: 15px;
-
         .device-item {
           width: 16px;
           height: 16px;

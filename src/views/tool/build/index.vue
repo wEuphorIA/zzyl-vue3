@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-import draggable from "vuedraggable/dist/vuedraggable.common"
+import draggable from "vuedraggable/dist/vuedraggable.common";
 import ClipboardJS from 'clipboard'
 import beautifier from 'js-beautify'
 import logo from '@/assets/logo/logo.png'
@@ -106,13 +106,12 @@ import drawingDefalut from '@/utils/generator/drawingDefalut'
 import { makeUpHtml, vueTemplate, vueScript, cssStyle } from '@/utils/generator/html'
 import { makeUpJs } from '@/utils/generator/js'
 import { makeUpCss } from '@/utils/generator/css'
-import Download from '@/plugins/download'
+import Download from '@/plugins/download';
 import { ElNotification } from 'element-plus'
 import DraggableItem from './DraggableItem'
 import RightPanel from './RightPanel'
 import CodeTypeDialog from './CodeTypeDialog'
 import { onMounted, watch } from 'vue'
-
 const drawingList = ref(drawingDefalut)
 const { proxy } = getCurrentInstance()
 const dialogVisible = ref(false)
@@ -142,7 +141,8 @@ function download() {
   operationType.value = 'download'
 }
 function empty() {
-  proxy.$modal.confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
+  proxy.$modal.confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(
+    () => {
       idGlobal.value = 100
       drawingList.value = []
     }
@@ -248,12 +248,12 @@ function generate(data) {
     switch (operationType.value) {
       case 'copy':
         execCopy(data)
-        break
+        break;
       case 'download':
         execDownload(data)
-        break
+        break;
       default:
-        break
+        break;
     }
   })
 }
@@ -261,6 +261,7 @@ function generate(data) {
 function execDownload(data) {
   const codeStr = generateCode()
   const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
+  console.log(proxy.download);
   Download.saveAs(blob, data.fileName)
 }
 
@@ -268,7 +269,10 @@ function execCopy(data) {
   document.getElementById('copyNode').click()
 }
 function AssembleFormData() {
-  formData.value = { fields: JSON.parse(JSON.stringify(drawingList.value)), ...formConf.value }
+  formData.value = {
+    fields: JSON.parse(JSON.stringify(drawingList.value)),
+    ...formConf.value
+  }
 }
 function generateCode() {
   const { type } = generateConf.value
@@ -290,23 +294,48 @@ watch(() => activeData.value.label, (val, oldVal) => {
 })
 watch(activeId, (val) => {
   oldActiveId = val
-}, { immediate: true })
+}, {
+  immediate: true
+})
 
 onMounted(() => {
   const clipboard = new ClipboardJS('#copyNode', {
     text: trigger => {
       const codeStr = generateCode()
-      ElNotification({ title: '成功', message: '代码已复制到剪切板，可粘贴。', type: 'success' })
+      ElNotification({
+        title: '成功',
+        message: '代码已复制到剪切板，可粘贴。',
+        type: 'success'
+      })
+
       return codeStr
     }
   })
   clipboard.on('error', e => {
-    proxy.$modal.msgError('代码复制失败')
+    ElMessage.error('代码复制失败')
   })
 })
 </script>
 
 <style lang='scss'>
+// body,
+// html {
+//   margin: 0;
+//   padding: 0;
+//   background: #fff;
+//   -moz-osx-font-smoothing: grayscale;
+//   -webkit-font-smoothing: antialiased;
+//   text-rendering: optimizeLegibility;
+//   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+// }
+
+// input,
+// textarea {
+//   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+// }
+
+
+
 $lighterBlue: #409EFF;
 
 .container {
@@ -647,7 +676,12 @@ $lighterBlue: #409EFF;
 
         }
       }
+
     }
+
   }
+
+
+
 }
 </style>

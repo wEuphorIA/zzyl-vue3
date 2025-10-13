@@ -9,6 +9,14 @@ export function listProject(query) {
   })
 }
 
+// 查询所有的护理等级
+export function getProjectAll() {
+  return request({
+    url: '/nursing/project/all',
+    method: 'get'
+  })
+}
+
 // 查询护理项目详细
 export function getProject(id) {
   return request({
@@ -40,13 +48,5 @@ export function delProject(id) {
   return request({
     url: '/nursing/project/' + id,
     method: 'delete'
-  })
-}
-
-//查询所有护理项目
-export function getAllProjects() {
-  return request({
-    url: '/nursing/project/all',
-    method: 'get'
   })
 }

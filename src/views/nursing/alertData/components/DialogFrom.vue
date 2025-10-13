@@ -1,16 +1,40 @@
 <!-- 处理结果弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog title="填写处理结果" v-model="formVisible" class="elDialogBox" @close="cancel">
+    <el-dialog
+      title="填写处理结果"
+      v-model="formVisible"
+      class="elDialogBox"
+      @close="cancel"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="queryRef" :model="formData" :rules="rules" label-width="108px">
+        <el-form
+          ref="queryRef"
+          :model="formData"
+          :rules="rules"
+          label-width="108px"
+        >
           <el-form-item label="处理时间：" prop="processingTime">
-            <el-date-picker v-model="formData.processingTime" placeholder="请选择" enable-time-picker allow-input clearable
-              class="wt-400" />
+            <el-date-picker
+              v-model="formData.processingTime"
+              placeholder="请选择"
+              enable-time-picker
+              allow-input
+              clearable
+              class="wt-400"
+            />
           </el-form-item>
-          <el-form-item label="处理结果：" prop="processingResult"><el-input v-model="formData.processingResult"
-              type="textarea" class="wt-400" placeholder="请输入" show-word-limit :maxlength="100" resize="none">
+          <el-form-item label="处理结果：" prop="processingResult"
+            ><el-input
+              v-model="formData.processingResult"
+              type="textarea"
+              class="wt-400"
+              placeholder="请输入"
+              show-word-limit
+              :maxlength="100"
+              resize="none"
+            >
             </el-input>
           </el-form-item>
         </el-form>
@@ -27,7 +51,6 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { getTateDt } from '@/utils/date';
 const { proxy } = getCurrentInstance();
 // 获取父组件值、方法
 const props = defineProps({
@@ -75,10 +98,8 @@ watch(
 const submitForm = () => {
   proxy.$refs['queryRef'].validate((valid) => {
     if (valid) {
-      formData.value.processingTime = getTateDt(formData.value.processingTime)
-      debugger;
-      emit('handleSub', formData.value);
-      handleClear()
+        emit('handleSub', formData.value);
+        handleClear()
     }
   });
 };

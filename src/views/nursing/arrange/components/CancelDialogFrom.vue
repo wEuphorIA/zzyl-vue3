@@ -1,12 +1,30 @@
 <!-- 取消原因弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog title="填写取消原因" v-model="formVisible" class="elDialogBox" @close="onClickCloseBtn">
+    <el-dialog
+      title="填写取消原因"
+      v-model="formVisible"
+      class="elDialogBox"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="queryRef" :model="formData" :rules="rules" label-width="108px">
-          <el-form-item label="取消原因：" name="reason"><el-input v-model="formData.reason" type="textarea" class="wt-400"
-              placeholder="请输入" show-word-limit :maxlength="100" resize="none">
+        <el-form
+          ref="queryRef"
+          :model="formData"
+          :rules="rules"
+          label-width="108px"
+        >
+          <el-form-item label="取消原因：" name="reason"
+            ><el-input
+              v-model="formData.reason"
+              type="textarea"
+              class="wt-400"
+              placeholder="请输入"
+              show-word-limit
+              :maxlength="100"
+              resize="none"
+            >
             </el-input>
           </el-form-item>
         </el-form>
@@ -69,8 +87,8 @@ watch(
 const submitForm = () => {
   proxy.$refs['queryRef'].validate((valid) => {
     if (valid) {
-      emit('handleEditForm', formData.value);
-      handleClear()
+        emit('handleEditForm', formData.value);
+        handleClear()
     }
   });
 };

@@ -8,14 +8,15 @@
       <template v-if="appStore.device !== 'mobile'">
         <header-search id="header-search" class="right-menu-item" />
 
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-        <el-tooltip content="主题模式" effect="dark" placement="bottom">
-          <div class="right-menu-item hover-effect theme-switch-wrapper" @click="toggleTheme">
-            <svg-icon v-if="settingsStore.isDark" icon-class="sunny" />
-            <svg-icon v-if="!settingsStore.isDark" icon-class="moon" />
-          </div>
+        <!-- <el-tooltip content="源码地址" effect="dark" placement="bottom">
+          <ruo-yi-git id="ruoyi-git" class="right-menu-item hover-effect" />
         </el-tooltip>
+
+        <el-tooltip content="文档地址" effect="dark" placement="bottom">
+          <ruo-yi-doc id="ruoyi-doc" class="right-menu-item hover-effect" />
+        </el-tooltip>
+ -->
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
@@ -97,10 +98,6 @@ const emits = defineEmits(['setLayout'])
 function setLayout() {
   emits('setLayout');
 }
-
-function toggleTheme() {
-  settingsStore.toggleTheme()
-}
 </script>
 
 <style lang='scss' scoped>
@@ -108,7 +105,7 @@ function toggleTheme() {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: var(--navbar-bg);
+  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
@@ -153,7 +150,7 @@ function toggleTheme() {
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
-      color: var(--navbar-text);
+      color: #5a5e66;
       vertical-align: text-bottom;
 
       &.hover-effect {
@@ -162,19 +159,6 @@ function toggleTheme() {
 
         &:hover {
           background: rgba(0, 0, 0, 0.025);
-        }
-      }
-
-      &.theme-switch-wrapper {
-        display: flex;
-        align-items: center;
-
-        svg {
-          transition: transform 0.3s;
-          
-          &:hover {
-            transform: scale(1.15);
-          }
         }
       }
     }

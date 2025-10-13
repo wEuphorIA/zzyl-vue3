@@ -2,10 +2,15 @@
 <template>
   <div class="headBox">
     <div class="sw-box" :class="routeType === 'config' ? 'configTpye' : ''">
-      <span v-for="(item, index) in data" :key="index" :class="{ title: true, line: currentId == index }"
-        @click.stop="changeId(item.id, index)">{{ item.name
-        }}<i class="edit" @click.stop="handleEdit(item.id, index)"></i><span v-if="item.value" class="value">{{
-          item.value }}</span></span>
+      <span
+        v-for="(item, index) in data"
+        :key="index"
+        :class="{ title: true, line: currentId == index }"
+        @click.stop="changeId(item.id, index)"
+        >{{ item.name
+        }}<i class="edit" @click.stop="handleEdit(item.id, index)"></i
+        ><span v-if="item.value" class="value">{{ item.value }}</span></span
+      >
       <div v-if="routeType !== 'config'" class="rText" @click="handleAdd">
         新增楼层
       </div>

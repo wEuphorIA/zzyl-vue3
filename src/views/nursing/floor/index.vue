@@ -3,37 +3,81 @@
   <div class="min-h content-layout">
     <div class="bg-wt">
       <!-- 楼层tab导航 -->
-      <SwitchBar ref="tabBar" :data="tabData" :floorIndex="floorIndex" @handle-floor-edit="handleFloorEdit"
-        @handle-add="handleFloorAdd" @change-id="getFloorId"></SwitchBar>
+      <SwitchBar
+        ref="tabBar"
+        :data="tabData"
+        :floorIndex="floorIndex"
+        @handle-floor-edit="handleFloorEdit"
+        @handle-add="handleFloorAdd"
+        @change-id="getFloorId"
+      ></SwitchBar>
       <!-- end -->
       <!-- 新增房间按钮 -->
       <FloorInfo @handle-add="handleRoomAdd"></FloorInfo>
       <!-- end -->
       <!-- 房型列表 -->
       <div>
-        <HouseList :room-voList="roomVoList" :floor-data="tabData" @handle-edit="handleRoomEdit"
-          @handle-delete="handleDelete" @handle-add="handleBedAdd" @handle-bed-edit="handleBedEdit"
-          @handle-check="handleRoomCheck"></HouseList>
+        <HouseList
+          :room-voList="roomVoList"
+          :floor-data="tabData"
+          @handle-edit="handleRoomEdit"
+          @handle-delete="handleDelete"
+          @handle-add="handleBedAdd"
+          @handle-bed-edit="handleBedEdit"
+          @handle-check="handleRoomCheck"
+        ></HouseList>
       </div>
       <!-- end -->
       <!-- 楼层添加、编辑 -->
-      <AddFloor ref="floor" :visible="floorVisible" :title="textVal" :min-number="minNum" :max-number="maxNum"
-        :data="floorData" :room-voList="roomVoList" :is-room-delete="isRoomDelete" @handle-delete="handleFloorDelete"
-        @handle-close="handleFloorClose" @handle-add="handleFloorAddSubmit" @handle-edit="handleFloorEditSubmit">
-      </AddFloor>
+      <AddFloor
+        ref="floor"
+        :visible="floorVisible"
+        :title="textVal"
+        :min-number="minNum"
+        :max-number="maxNum"
+        :data="floorData"
+        :room-voList="roomVoList"
+        :is-room-delete="isRoomDelete"
+        @handle-delete="handleFloorDelete"
+        @handle-close="handleFloorClose"
+        @handle-add="handleFloorAddSubmit"
+        @handle-edit="handleFloorEditSubmit"
+      ></AddFloor>
       <!-- end -->
       <!-- 房间添加、编辑 -->
-      <AddRoom ref="room" :visible="roomVisible" :title="textVal" :min-number="minNum" :max-number="maxNum"
-        :data="roomData" :room-type-data="roomTypeData" @handle-close="handleRoomClose"
-        @handle-add="handleRoomAddSubmit" @handle-edit="handleRoomEditSubmit"></AddRoom>
+      <AddRoom
+        ref="room"
+        :visible="roomVisible"
+        :title="textVal"
+        :min-number="minNum"
+        :max-number="maxNum"
+        :data="roomData"
+        :room-type-data="roomTypeData"
+        @handle-close="handleRoomClose"
+        @handle-add="handleRoomAddSubmit"
+        @handle-edit="handleRoomEditSubmit"
+      ></AddRoom>
       <!-- end -->
       <!-- 床位添加、编辑 -->
-      <AddBed ref="bed" :visible="bedVisible" :title="textVal" :min-number="minNum" :max-number="maxNum" :data="bedData"
-        @handle-close="handleBedClose" @handle-add="handleBedAddSubmit" @handle-edit="handleBedEditSubmit"></AddBed>
+      <AddBed
+        ref="bed"
+        :visible="bedVisible"
+        :title="textVal"
+        :min-number="minNum"
+        :max-number="maxNum"
+        :data="bedData"
+        @handle-close="handleBedClose"
+        @handle-add="handleBedAddSubmit"
+        @handle-edit="handleBedEditSubmit"
+      ></AddBed>
       <!-- end -->
       <!-- 删除 -->
-      <Delete :visible="deleteVisible" :delete-text="operateText" @handle-close="handleDeleteClose"
-        @handle-delete="handleDeleteSubmit"></Delete>
+      <Delete
+        :visible="deleteVisible"
+        :delete-text="operateText"
+        @handle-close="handleDeleteClose"
+        @handle-delete="handleDeleteSubmit"
+      ></Delete>
       <!-- end -->
     </div>
   </div>
@@ -323,16 +367,16 @@ const handleRoomEdit = (id) => {
   handleRoomData(id); // 打开编辑，获取房间详情
   roomVisible.value = true;
 };
-// 查看房间
-const handleRoomCheck = (id) => {
-  handleRoomData(id);
-  checkVisible.value = true;
-};
-// 关闭查看房间
-const handleCheckRoomClose = () => {
-  room.value.handleClear();
-  checkVisible.value = false;
-};
+// // 查看房间
+// const handleRoomCheck = (id) => {
+//   handleRoomData(id);
+//   checkVisible.value = true;
+// };
+// // 关闭查看房间
+// const handleCheckRoomClose = () => {
+//   room.value.handleClear();
+//   checkVisible.value = false;
+// };
 // 关闭房间弹层
 const handleRoomClose = () => {
   roomVisible.value = false;

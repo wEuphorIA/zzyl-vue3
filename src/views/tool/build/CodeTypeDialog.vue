@@ -14,8 +14,12 @@
     </el-form>
 
     <template #footer>
-      <el-button @click="onClose">取消</el-button>
-      <el-button type="primary" @click="handelConfirm">确定</el-button>
+      <el-button @click="onClose">
+        取消
+      </el-button>
+      <el-button type="primary" @click="handelConfirm">
+        确定
+      </el-button>
     </template>
   </el-dialog>
 </template>
@@ -29,7 +33,7 @@ const emit = defineEmits(['confirm'])
 const formData = ref({
   fileName: undefined,
   type: 'file'
-})
+});
 const codeTypeForm = ref()
 const rules = {
   fileName: [{
@@ -42,7 +46,7 @@ const rules = {
     message: '生成类型不能为空',
     trigger: 'change'
   }]
-}
+};
 const typeOptions = ref([
   {
     label: '页面',
@@ -52,15 +56,17 @@ const typeOptions = ref([
     label: '弹窗',
     value: 'dialog'
   }
-])
+]);
 function onOpen() {
   if (props.showFileName) {
-    formData.value.fileName = `${+new Date()}.vue`
+    formData.value.fileName = `${+new Date()}.vue`;
   }
 }
+
 function onClose() {
   open.value = false
-}
+};
+
 function handelConfirm() {
   codeTypeForm.value.validate(valid => {
     if (!valid) return

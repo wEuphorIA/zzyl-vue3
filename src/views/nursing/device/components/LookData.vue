@@ -1,5 +1,10 @@
 <template>
-  <el-dialog title="查看数据" v-model="visible" class="oldSelectDialog" @close="handleClose">
+  <el-dialog
+    title="查看数据"
+    v-model="visible"
+    class="oldSelectDialog"
+    @close="handleClose"
+  >
     <div class="dialogCenter">
       <!-- 搜索 -->
       <el-form ref="ruleForm" :data="pagination" :label-width="116">
@@ -8,21 +13,37 @@
             <el-row>
               <el-col :span="9">
                 <el-form-item label="老人姓名：" name="name">
-                  <el-input v-model="pagination.name" class="form-item-content" clearable type="search"
-                    placeholder="请输入" />
+                  <el-input
+                    v-model="pagination.name"
+                    class="form-item-content"
+                    clearable
+                    type="search"
+                    placeholder="请输入"
+                  />
                 </el-form-item>
               </el-col>
               <el-col :span="9">
-                <el-form-item label="老人身份证号：" name="idCardNo" class="label-wt">
-                  <el-input v-model="pagination.idCardNo" class="form-item-content" clearable type="search"
-                    placeholder="请输入" />
+                <el-form-item
+                  label="老人身份证号："
+                  name="idCardNo"
+                  class="label-wt"
+                >
+                  <el-input
+                    v-model="pagination.idCardNo"
+                    class="form-item-content"
+                    clearable
+                    type="search"
+                    placeholder="请输入"
+                  />
                 </el-form-item>
               </el-col>
               <el-col :span="6">
                 <!-- 按钮区域 -->
                 <div class="searchBtn">
                   <el-button @click="handleReset">重 置</el-button>
-                  <el-button type="primary" @click="handleSearch">搜 索</el-button>
+                  <el-button type="primary" @click="handleSearch"
+                    >搜 索</el-button
+                  >
                 </div>
               </el-col>
             </el-row>
@@ -30,11 +51,18 @@
         </el-row>
       </el-form>
       <!-- end -->
-      <el-table ref="multipleTableRef" :data="dialogData" style="width: 100%" @row-click="chooseone"
-        @current-change="handleCurrentChange">
+      <el-table
+        ref="multipleTableRef"
+        :data="dialogData"
+        style="width: 100%"
+        @row-click="chooseone"
+        @current-change="handleCurrentChange"
+      >
         <el-table-column width="55">
           <template #default="scope">
-            <el-radio v-model="selectedRowKeys" :label="scope.row.id"><span class="el-radio__label"></span></el-radio>
+            <el-radio v-model="selectedRowKeys" :label="scope.row.id"
+              ><span class="el-radio__label"></span
+            ></el-radio>
           </template>
         </el-table-column>
         <el-table-column label="序号" type="index" width="50" />
@@ -42,8 +70,13 @@
         <el-table-column prop="idCardNo" label="老人身份证号" />
         <el-table-column prop="bedNumber" label="床位号" width="180" />
       </el-table>
-      <Pagination v-show="pagination.total > 0" :total="pagination.total" v-model:page="pagination.pageNum"
-        v-model:limit="pagination.pageSize" @pagination="getList" />
+      <Pagination
+        v-show="pagination.total > 0"
+        :total="pagination.total"
+        v-model:page="pagination.pageNum"
+        v-model:limit="pagination.pageSize"
+        @pagination="getList"
+      />
       <div class="dialog-footer">
         <el-button @click="handleClose">取消</el-button>
         <el-button type="primary" @click="handleSub">确定</el-button>

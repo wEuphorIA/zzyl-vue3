@@ -71,7 +71,7 @@
         <el-form-item label="状态" prop="status">
           <el-radio-group v-model="form.status">
             <el-radio v-for="(nls, index) in nursing_level_status" :key="index" :value="nls.value">{{
-              nls.label}}</el-radio>
+              nls.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="等级说明" prop="description">
@@ -89,7 +89,7 @@
 </template>
 
 <script setup name="Level">
-import { listLevel, getLevel, delLevel, addLevel, updateLevel } from "@/api/nursing/level";
+import { listNursingLevel, getNursingLevel, addNursingLevel, updateNursingLevel, delNursingLevel } from "@/api/nursing/level";
 import { getAllNursingPlans } from "@/api/nursing/plan";
 
 const { proxy } = getCurrentInstance();
@@ -138,7 +138,7 @@ const { nursing_level_status } = proxy.useDict('nursing_level_status')
 /** 查询护理等级列表 */
 function getList() {
   loading.value = true;
-  listLevel(queryParams.value).then(response => {
+  listNursingLevel(queryParams.value).then(response => {
     levelList.value = response.rows;
     total.value = response.total;
     loading.value = false;
@@ -199,7 +199,7 @@ function handleAdd() {
 function handleUpdate(row) {
   reset();
   const _id = row.id || ids.value
-  getLevel(_id).then(response => {
+  getNursingLevel(_id).then(response => {
     form.value = response.data;
     form.value.status = String(response.data.status);
     open.value = true;
@@ -212,13 +212,13 @@ function submitForm() {
   proxy.$refs["levelRef"].validate(valid => {
     if (valid) {
       if (form.value.id != null) {
-        updateLevel(form.value).then(response => {
+        updateNursingLevel(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
-        addLevel(form.value).then(response => {
+        addNursingLevel(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;
           getList();
@@ -232,7 +232,7 @@ function submitForm() {
 function handleDelete(row) {
   const _ids = row.id || ids.value;
   proxy.$modal.confirm('是否确认删除护理等级编号为"' + _ids + '"的数据项？').then(function () {
-    return delLevel(_ids);
+    return delNursingLevel(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
@@ -251,7 +251,7 @@ const handleEnable = (row) => {
     status: status == 0 ? 1 : 0
   }
   proxy.$modal.confirm(`是否确认${info}该护理等级？`).then(function () {
-    return updateLevel(params);
+    return updateNursingLevel(params);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess(info + "成功");

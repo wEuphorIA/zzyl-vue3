@@ -5,6 +5,9 @@
     .searchPdf{
       color:#409EFF ; // 按钮文字颜色设置为蓝色
     }
+    h3{
+      padding-bottom: 20px;
+    }
   }
   
   // 文本居中样式
@@ -33,4 +36,18 @@
         height: 50px; line-height: 50px; // 设置表格行高及高度以适应内容
       }
     }
+  }
+  .oldSelectDialog{
+    .elDialogBox{
+      width: 850px;
+    }
+  }
+  .el-upload{
+    .avatar{
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+    }
+    width: 100px;
+    height: 100px;
   }

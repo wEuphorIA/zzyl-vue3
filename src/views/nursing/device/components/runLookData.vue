@@ -1,5 +1,10 @@
 <template>
-  <el-dialog title="查看数据" v-model="visible" class="oldSelectDialog" @close="handleClose">
+  <el-dialog
+    title="查看数据"
+    v-model="visible"
+    class="oldSelectDialog"
+    @close="handleClose"
+  >
     <div class="dialogCenter">
       <!-- 搜索 -->
       <el-form ref="ruleForm" :data="pagination" :label-width="116">
@@ -8,12 +13,26 @@
             <el-row>
               <el-col :span="9">
                 <el-form-item label="时间范围：" name="name">
-                  <el-select v-model="timeValue" filterable placeholder="请选择" @change="handleTime">
-                    <el-option v-for="(item, index) in timeData" :key="index" :value="item.id" :label="item.value"
-                      title=""></el-option>
+                  <el-select
+                    v-model="timeValue"
+                    filterable
+                    placeholder="请选择"
+                    @change="handleTime"
+                  >
+                    <el-option
+                      v-for="(item, index) in timeData"
+                      :key="index"
+                      :value="item.id"
+                      :label="item.value"
+                      title=""
+                    ></el-option>
                   </el-select>
-                  <el-date-range-picker v-if="typeValue === 3" v-model="time" :placeholder="['开始日期', '结束日期']"
-                    @change="handleDate" />
+                  <el-date-range-picker
+                    v-if="typeValue === 3"
+                    v-model="time"
+                    :placeholder="['开始日期', '结束日期']"
+                    @change="handleDate"
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -26,8 +45,13 @@
         <el-table-column prop="dataValue" label="原始值" />
         <el-table-column prop="alarmTime" label="时间" />
       </el-table>
-      <Pagination v-show="pagination.total > 0" :total="pagination.total" v-model:page="pagination.pageNum"
-        v-model:limit="pagination.pageSize" @pagination="getLists" />
+      <Pagination
+        v-show="pagination.total > 0"
+        :total="pagination.total"
+        v-model:page="pagination.pageNum"
+        v-model:limit="pagination.pageSize"
+        @pagination="getLists"
+      />
     </div>
   </el-dialog>
 </template>
@@ -85,7 +109,7 @@ const handleClose = () => {
   emit('handleCloseDialog');
 };
 const getLists = (val) => {
-  emit('getList', val);
+  emit('getList',val);
 };
 // 时间筛选、自定义除外
 const handleTime = (val) => {

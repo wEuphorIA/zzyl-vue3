@@ -2,80 +2,194 @@
   <div class="detail-base ruleDetail">
     <div ref="mainHeight" class="bg-wt">
       <el-card header="报警规则">
-        <el-form ref="formRef" :model="formData" :rules="rules" :label-width="120">
+        <el-form
+          ref="formRef"
+          :model="formData"
+          :rules="rules"
+          :label-width="120"
+        >
           <el-card title="报警规则">
             <el-form-item label="所属产品：" prop="productKey">
-              <el-select v-model="formData.productKey" clearable filterable placeholder="请选择" class="wt-300"
-                @change="handleProduct">
-                <el-option v-for="(item, index) in productData" :key="index" :value="item.productKey"
-                  :label="item.productName" title=""></el-option>
+              <el-select
+                v-model="formData.productKey"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+                @change="handleProduct"
+              >
+                <el-option
+                  v-for="(item, index) in productData"
+                  :key="index"
+                  :value="item.productId"
+                  :label="item.name"
+                  title=""
+                ></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="模块：" prop="moduleId">
-              <el-select v-model="formData.moduleId" clearable filterable placeholder="请选择" class="wt-300"
-                :disabled="formData.productKey !== undefined ? false : true" @change="handleModele">
-                <el-option v-for="(item, index) in itemData" :key="index" :value="item.functionBlockId"
-                  :label="item.functionBlockName" title="">
-                  {{ item.functionBlockName }}
+            <el-form-item label="服务：" prop="moduleId">
+              <el-select
+                v-model="formData.moduleId"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+                :disabled="formData.productKey !== undefined ? false : true"
+                @change="handleModele"
+              >
+                <el-option
+                  v-for="(item, index) in itemData"
+                  :key="index"
+                  :value="item.service_id"
+                  :label="item.service_id"
+                  title=""
+                >
+                  {{ item.service_id }}
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="功能名称：" prop="functionId">
-              <el-select v-model="formData.functionId" clearable filterable placeholder="请选择" class="wt-300"
-                :disabled="formData.moduleId !== undefined ? false : true" @change="handleIdentifier">
-                <el-option v-for="(item, index) in publishedData" :key="index" :value="item.identifier"
-                  :label="item.name" title="">
-                  {{ item.name }}
+              <el-select
+                v-model="formData.functionId"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+                :disabled="formData.moduleId !== undefined ? false : true"
+                @change="handleIdentifier"
+              >
+                <el-option
+                  v-for="(item, index) in publishedData"
+                  :key="index"
+                  :value="item.property_name"
+                  :label="item.property_name"
+                  title=""
+                >
+                  {{ item.property_name }}
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="关联设备：" prop="iotId">
-              <el-select v-model="formData.iotId" clearable filterable placeholder="请选择" class="wt-300"
-                :disabled="formData.productKey !== undefined ? false : true" @change="handleDevice">
-                <el-option v-for="(item, index) in listData" :key="index" :value="item.iotId" :label="item.deviceName"
-                  title="">
+              <el-select
+                v-model="formData.iotId"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+                :disabled="formData.productKey !== undefined ? false : true"
+                @change="handleDevice"
+              >
+                <el-option
+                  v-for="(item, index) in listData"
+                  :key="index"
+                  :value="item.iotId"
+                  :label="item.deviceName"
+                  title=""
+                >
                   {{ item.deviceName }}
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="报警数据类型：" prop="alertDataType">
               <el-radio-group v-model="formData.alertDataType">
-                <el-radio v-for="(item, index) in dataType" :key="index" :label="item.id">{{ item.value }}</el-radio>
+                <el-radio
+                  v-for="(item, index) in dataType"
+                  :key="index"
+                  :label="item.id"
+                  >{{ item.value }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
             <el-form-item label="报警规则名称：" prop="alertRuleName">
-              <el-input v-model="formData.alertRuleName" placeholder="请输入" class="wt-300" show-limit-number
-                show-word-limit :maxlength="20">
+              <el-input
+                v-model="formData.alertRuleName"
+                placeholder="请输入"
+                class="wt-300"
+                show-limit-number
+                show-word-limit
+                :maxlength="20"
+              >
               </el-input>
             </el-form-item>
             <el-form-item label="持续周期：" prop="duration">
-              <el-select v-model="formData.duration" clearable filterable placeholder="请选择" class="wt-300">
-                <el-option v-for="(item, index) in continuePeriodData" :key="index" :value="item.value"
-                  :label="item.label" title="">
+              <el-select
+                v-model="formData.duration"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+              >
+                <el-option
+                  v-for="(item, index) in continuePeriodData"
+                  :key="index"
+                  :value="item.value"
+                  :label="item.label"
+                  title=""
+                >
                   {{ item.label }}
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="运算符：" prop="operator">
-              <el-select v-model="formData.operator" clearable filterable placeholder="请选择" class="wt-300">
-                <el-option v-for="(item, index) in operatorData" :key="index" :value="item.value" :label="item.value"
-                  title="">
+              <el-select
+                v-model="formData.operator"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+              >
+                <el-option
+                  v-for="(item, index) in operatorData"
+                  :key="index"
+                  :value="item.value"
+                  :label="item.value"
+                  title=""
+                >
                   {{ item.value }}
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="阈值：" prop="value">
-              <el-input-number v-model="formData.value" :step="1" large-number :max="99999999" placeholder="0.0"
-                :decimal-places="1" @blur="textBlur" @change="textBlur"></el-input-number>
+              <el-input-number
+                v-model="formData.value"
+                :step="1"
+                large-number
+                :max="99999999"
+                placeholder="0.0"
+                :decimal-places="1"
+                @blur="textBlur"
+                @change="textBlur"
+              ></el-input-number>
             </el-form-item>
             <el-form-item label="报警生效时段：" prop="alertEffectivePeriod">
-              <el-time-picker v-model="formData.alertEffectivePeriod" class="wt-300" clearable is-range
-                range-separator="-" value-format="HH:mm:ss" @pick="handleRangePick" />
+              <el-time-picker
+                v-model="formData.alertEffectivePeriod"
+                class="wt-300"
+                clearable
+                is-range
+                range-separator="-"
+                value-format="HH:mm:ss"
+                @pick="handleRangePick"
+              />
             </el-form-item>
             <el-form-item label="报警沉默周期：" prop="alertSilentPeriod">
-              <el-select v-model="formData.alertSilentPeriod" clearable filterable placeholder="请选择" class="wt-300">
-                <el-option v-for="(item, index) in silenceCycleData" :key="index" :value="item.value" :label="item.id > 4 ? item.value + '小时' : item.value + '分钟'
-                  " title="" @click="handlePeriod(item)">
+              <el-select
+                v-model="formData.alertSilentPeriod"
+                clearable
+                filterable
+                placeholder="请选择"
+                class="wt-300"
+              >
+                <el-option
+                  v-for="(item, index) in silenceCycleData"
+                  :key="index"
+                  :value="item.value"
+                  :label="
+                    item.id > 4 ? item.value + '小时' : item.value + '分钟'
+                  "
+                  title=""
+                  @click="handlePeriod(item)"
+                >
                   {{ item.id > 4 ? item.value + '小时' : item.value + '分钟' }}
                 </el-option>
               </el-select>
@@ -275,23 +389,24 @@ const getProduct = async () => {
 // 获取运行状态
 const getPublished = async (val) => {
   const params = {
-    ...published.value,
+    // ...published.value,
     productKey: val, // 产品key
   };
   const res = await getPublishedList(params); // 获取列表数据
   if (res.code === 200) {
     if (res.data !== undefined) {
-      const data = JSON.parse(res.data.thingModelJson);
+      const data = res.data;
+      console.log(data,111)
       itemData.value = [];
-      const obj = {
-        functionBlockId: '-1',
-        functionBlockName: '默认模块',
-      };
-      if (data.functionBlocks !== undefined) {
-        itemData.value = data.functionBlocks;
+      // const obj = {
+      //   functionBlockId: '-1',
+      //   functionBlockName: '默认模块',
+      // };
+      if (data !== undefined) {
+        itemData.value = data;
       }
-      publishedData.value = data.properties;
-      itemData.value.unshift(obj);
+      // publishedData.value = data.properties;
+      // itemData.value.unshift(obj);
     }
   }
 };
@@ -324,28 +439,30 @@ const handleProduct = (val, e) => {
     delete formData.value.functionId;
     // form.value.clearValidate(['moduleId', 'iotId', 'functionId'])
   });
-  const arr = productData.value.filter((item) => item.productKey === val);
-  formData.value.productName = arr[0].productName;
+  const arr = productData.value.filter((item) => item.productId === val);
+  formData.value.productName = arr[0].name;
   formData.value.productKey = val;
   getPublished(val);
   getList(val);
 };
 // 触发模块
 const handleModele = (val, e) => {
-  formData.value.moduleName = '默认模块';
-  // 如果选择的是自定义模块需要传functionBlockId
-  if (val !== '-1') {
-    published.value.functionBlockId = e.selectedOptions[0].value;
-  } else {
-    // 否则删除functionBlockId，显示默认模块的数据
-    delete published.value.functionBlockId;
-  }
-  getPublished(formData.value.productKey);
+  const data = itemData.value.filter(item=>item.service_id===val)
+  publishedData.value = data[0].properties
+  // formData.value.moduleName = '默认模块';
+  // // 如果选择的是自定义模块需要传functionBlockId
+  // if (val !== '-1') {
+  //   published.value.functionBlockId = e.selectedOptions[0].value;
+  // } else {
+  //   // 否则删除functionBlockId，显示默认模块的数据
+  //   delete published.value.functionBlockId;
+  // }
+  // getPublished(formData.value.productKey);
 };
 // 触发功能
 const handleIdentifier = (val, e) => {
-  const arr = publishedData.value.filter((item) => item.identifier === val);
-  formData.value.functionName = arr[0].name;
+  const arr = publishedData.value.filter((item) => item.property_name === val);
+  formData.value.functionName = arr[0].property_name;
 };
 
 // 触发设备

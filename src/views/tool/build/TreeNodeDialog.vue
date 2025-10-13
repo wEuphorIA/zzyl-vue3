@@ -22,12 +22,14 @@
           </el-form-item>
         </el-col>
       </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="handelConfirm">确 定</el-button>
-          <el-button @click="onClose">取 消</el-button>
-        </div>
-      </template>
+      <div slot="footer">
+        <el-button type="primary" @click="handelConfirm">
+          确定
+        </el-button>
+        <el-button @click="onClose">
+          取消
+        </el-button>
+      </div>
     </el-dialog>
   </div>
 </template>

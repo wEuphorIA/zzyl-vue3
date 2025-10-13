@@ -1,26 +1,58 @@
 <!-- 楼层新增编辑弹窗 -->
 <template>
   <div class="dialog-form">
-    <el-dialog :title="pageTitle + '房间'" v-model="formVisible" @close="onClickCloseBtn">
+    <el-dialog
+      :title="pageTitle + '房间'"
+      v-model="formVisible"
+      @close="onClickCloseBtn"
+    >
       <!-- 表单内容 -->
       <div class="dialogCenter">
-        <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
+        <el-form
+          ref="formRef"
+          :model="formData"
+          :rules="rules"
+          label-width="100px"
+        >
           <el-form-item label="房间号：" prop="code">
-            <el-input v-model="formData.code" class="wt-400" placeholder="请输入" clearable show-limit-number
-              :maxlength="5">
+            <el-input
+              v-model="formData.code"
+              class="wt-400"
+              placeholder="请输入"
+              clearable
+              show-limit-number
+              :maxlength="5"
+            >
             </el-input>
           </el-form-item>
           <el-form-item label="房间类型：" prop="typeName">
-            <el-select v-model="formData.typeName" clearable filterable placeholder="请选择">
-              <el-option v-for="(item, index) in roomTypeData" :key="index" :value="item.name" :label="item.name"
-                title="">
+            <el-select
+              v-model="formData.typeName"
+              clearable
+              filterable
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="(item, index) in roomTypeData"
+                :key="index"
+                :value="item.name"
+                :label="item.name"
+                title=""
+              >
                 {{ item.name }}
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="排序：" prop="sort">
-            <el-input-number v-model="formData.sort" :min="minNumber" large-number :max="maxNumber" :decimal-places="0"
-              @blur="textBlurNo" @change="textBlurNo"></el-input-number>
+            <el-input-number
+              v-model="formData.sort"
+              :min="minNumber"
+              large-number
+              :max="maxNumber"
+              :decimal-places="0"
+              @blur="textBlurNo"
+              @change="textBlurNo"
+            ></el-input-number>
           </el-form-item>
         </el-form>
         <div class="dialog-footer">
@@ -141,17 +173,17 @@ watch(
 // -----定义方法------
 // 提交表单
 const onSubmit = () => {
-  proxy.$refs['formRef'].validate((valid) => {
+proxy.$refs['formRef'].validate((valid) => {
     if (valid) {
-      if (props.title === '新增') {
-        // 调用新增接口
-        emit('handleAdd', formData.value)
-      } else {
-        // 调用编辑接口
-        emit('handleEdit', formData.value)
-      }
+        if (props.title === '新增') {
+      // 调用新增接口
+      emit('handleAdd', formData.value)
+    } else {
+      // 调用编辑接口
+      emit('handleEdit', formData.value)
     }
-  });
+    }
+});
 }
 
 // 清除表单数据

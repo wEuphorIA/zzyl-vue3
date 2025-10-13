@@ -9,10 +9,10 @@ export const locationTypeOptions = [
   },
 ];
 export const facilityTabData = [
-  {
-    id: 0,
-    name: '设备详情',
-  },
+  // {
+  //   id: 0,
+  //   name: '设备详情',
+  // },
   {
     id: 1,
     name: '物模型数据',

@@ -5,9 +5,17 @@
         <el-input v-model="queryParams.alertRuleName" placeholder="请输入告警规则名称" clearable @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item label="所属产品" prop="productKey">
-        <el-select v-model="queryParams.productKey" placeholder="请选择" clearable>
-          <el-option v-for="item in options" :key="item.productKey" :label="item.productName"
-            :value="item.productKey" />
+        <el-select
+          v-model="queryParams.productKey"
+          placeholder="请选择"
+          clearable
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.productId"
+            :label="item.name"
+            :value="item.productId"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -25,21 +33,21 @@
 
     <el-table v-loading="loading" :data="alertRuleList" @selection-change="handleSelectionChange">
       <el-table-column label="序号" type="index" width="55" />
-      <el-table-column label="告警规则名称" align="center" prop="alertRuleName" width="150" />
-      <el-table-column label="所属产品" align="center" prop="productName" width="150" />
-      <el-table-column label="关联设备" align="center" prop="deviceName" width="150" />
-      <el-table-column label="报警规则" align="center" prop="operator" width="260">
+      <el-table-column label="告警规则名称" align="center" prop="alertRuleName"  width="150"/>
+      <el-table-column label="所属产品" align="center" prop="productName"  width="150"/>
+      <el-table-column label="关联设备" align="center" prop="deviceName" width="150"/>
+      <el-table-column label="报警规则" align="center" prop="operator"  width="260" >
         <template #default="scope">
           {{ scope.row.functionName }} {{ scope.row.operator }}{{ scope.row.value }},持续{{ scope.row.duration }}个周期就报警
         </template>
       </el-table-column>
-      <el-table-column label="报警生效时段" align="center" prop="alertEffectivePeriod" width="180" />
+      <el-table-column label="报警生效时段" align="center" prop="alertEffectivePeriod"  width="180" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" align="center" prop="status">
+      <el-table-column label="状态" align="center" prop="status" >
         <template #default="scope">
           <el-tag :type="scope.row.status === 0 ? 'danger' : 'success'">{{
             scope.row.status === 0 ? '禁用' : '启用'
@@ -48,17 +56,24 @@
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center" class-name="small-padding fixed-width" width="200">
         <template #default="scope">
-          <el-button link type="danger" icon="Delete" @click="handleDelete(scope.row)">删除</el-button>
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">修改</el-button>
-          <el-button link type="primary" :icon="scope.row.status == 0 ? 'Unlock' : 'lock'"
-            @click="handleEnable(scope.row)">{{ scope.row.status === 1 ? '禁用' : '启用' }}</el-button>
-
+          <el-button link type="danger" icon="Delete" @click="handleDelete(scope.row)"
+            >删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
+            >修改</el-button>
+            <el-button
+            link
+            type="primary"
+            :icon="scope.row.status == 0 ? 'Unlock' : 'lock'"
+            @click="handleEnable(scope.row)"
+            >{{ scope.row.status === 1 ? '禁用' : '启用' }}</el-button
+          >
+          
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+      @pagination="getList" />
   </div>
 </template>
 
@@ -199,7 +214,7 @@ function handleUpdate(row) {
   // });
   router.push({
     path: '/intelligence/ruleDetails',
-    query: { id: row.id },
+    query: { id:row.id },
   });
 }
 
