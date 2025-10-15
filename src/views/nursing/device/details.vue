@@ -365,7 +365,7 @@ const onPageChange = (val) => {
 };
 // 打开查看数据弹层
 const handleDetails = (row) => {
-  paginationLook.value.functionId = row.identifier;
+  paginationLook.value.functionId = row.functionId;
   dialogVisible.value = true;
   getLookList();
 };

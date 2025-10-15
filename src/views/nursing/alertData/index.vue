@@ -52,12 +52,6 @@
         width="180"
       />
       <el-table-column
-        label="备注名称"
-        align="center"
-        prop="nickname"
-        width="180"
-      />
-      <el-table-column
         label="所属产品"
         align="center"
         prop="productName"
@@ -76,7 +70,7 @@
       <el-table-column
         label="接入位置"
         align="center"
-        prop="accessLocation"
+        prop="remark"
         width="180"
       />
       <el-table-column

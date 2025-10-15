@@ -173,7 +173,7 @@ const getDetailsData = (id) => {
   getHealthAssessment(id).then((res) => {
     baseData.value = res.data;
     abnormalAnalysis.value = JSON.parse(baseData.value.abnormalAnalysis);
-    diseaseRisk.value = JSON.parse(baseData.value.diseaseRisk);
+    // diseaseRisk.value = JSON.parse(baseData.value.diseaseRisk);
     systemScore.value = JSON.parse(baseData.value.systemScore);
   });
 };

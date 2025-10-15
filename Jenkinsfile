@@ -14,11 +14,11 @@ pipeline {
                 echo "正在拉取代码..."
                 echo "当前分支:${GIT_TAG},当前服务:ruoyi-vue"
                 checkout([$class: 'GitSCM',
-                        branches: [[name: GIT_TAG]],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions: [],
-                        submoduleCfg: [],
-                        userRemoteConfigs: [[credentialsId: 'git', url: GIT_URL]]
+                          branches: [[name: GIT_TAG]],
+                          doGenerateSubmoduleConfigurations: false,
+                          extensions: [],
+                          submoduleCfg: [],
+                          userRemoteConfigs: [[credentialsId: 'git', url: GIT_URL]]
                 ])
                 sh "pwd"
             }

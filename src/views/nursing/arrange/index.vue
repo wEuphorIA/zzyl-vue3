@@ -204,8 +204,8 @@ import {
   listNursingTask,
   cancelPlan,
   executePlan,
-  changePlanTime 
-} from '@/api/nursing/task';
+  changePlanTime
+} from '@/api/nursing/nursingTask';
 import { getAllUserList } from '@/api/system/user';
 import { getProjectAll } from '@/api/nursing/project';
 import dayjs from 'dayjs';

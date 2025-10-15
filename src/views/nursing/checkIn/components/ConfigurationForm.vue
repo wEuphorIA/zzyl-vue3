@@ -89,7 +89,7 @@
     </div>
 </template>
 <script setup>
-import { getNursingLevelAll } from '@/api/nursing/level'
+import { getNursingLevelAll } from '@/api/nursing/nursingLevel'
 import { getFloorBed, getRootById } from '@/api/nursing/floor'
 import {
     ElMessage
