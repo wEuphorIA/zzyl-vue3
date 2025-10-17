@@ -192,7 +192,7 @@ const data = reactive({
   queryParams: {
     pageNum: 1,
     pageSize: 10,
-    deviceName: null,
+    deviceName: '',
     createTime: null,
   },
   rules: {
@@ -237,16 +237,19 @@ const handleSub = async (val) => {
 
 /** 搜索按钮操作 */
 function handleQuery() {
-  queryParams.value = {};
+  // queryParams.value = {};
   queryParams.value.pageNum = 1;
   queryParams.value.pageSize = 10;
+  console.log(queryParams.value);
   getList();
 }
 
 /** 重置按钮操作 */
 function resetQuery() {
   timeData.value = []
-  // proxy.resetForm('queryRef');
+  proxy.resetForm('queryRef');
+  // 2. 完全重置查询参数对象
+  queryParams.value = {};
   handleQuery();
 }
 
